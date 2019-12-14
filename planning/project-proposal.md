@@ -6,7 +6,7 @@
 
 ### Wireframe
 
-TBD
+https://balsamiq.cloud/s7k3b5m/ppu2jy3
 
 ### Project Requirements
 
@@ -20,4 +20,9 @@ TBD
 
 ### Task Breakdown
 
-TBD
+- Landing page layout @crichID
+- Modal for getting started/preferences @crichID
+- Recipe search and selection @wdvaughn
+- Recipe swap drop down (swap for favorite or random)
+- Mark a recipe as a favorite
+- Add ingredients to shopping list
