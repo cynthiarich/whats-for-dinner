@@ -15,6 +15,18 @@ $(document).on("click", "#meal-prefs", function () {
 
 })
 
+//makes the preference options for the health key
+var protein = ["chicken", "turkey", "beef", "pork", "fish", "shellfish", "tofu/soy", "egg", "other beans"]
+for (i=0; i<protein.length; i++) {
+    $(".protein").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(protein[i]));
+}  
+
+//makes the preference options for the health key
+var preferences = ["vegan", "vegetarian", "paleo", "dairy-free", "gluten-free", "fat-free", "low-sugar", "egg-free", "peanut-free", "soy-free", "shellfish-free"]
+for (i=0; i<preferences.length; i++) {
+    $(".preference").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(preferences[i]));
+}  
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
