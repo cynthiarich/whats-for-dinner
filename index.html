@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css" />
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    <script src="./auth.js"></script>
+
     <title>What's for Dinner?</title>
 </head>
 
@@ -29,6 +27,30 @@
     <div id="firebaseui-auth-container">
         <!-- This is where the Login ui will load -->
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBufhI3DF63sZuqtKWhmNMBBeDXDFhq5bU",
+            authDomain: "whats-for-dinner-e745a.firebaseapp.com",
+            databaseURL: "https://whats-for-dinner-e745a.firebaseio.com",
+            projectId: "whats-for-dinner-e745a",
+            storageBucket: "whats-for-dinner-e745a.appspot.com",
+            messagingSenderId: "290069514662",
+            appId: "1:290069514662:web:e28fcfe875a8334c542767",
+            measurementId: "G-F50Y95R11R"
+        };
+
+        // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <!-- Firebase UI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script src="./auth.js"></script>
 
     <div>
         <!--content to be moved into modal-->
@@ -51,10 +73,6 @@
 
     </div>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js"></script>
     <script src="assets/script.js"></script>
