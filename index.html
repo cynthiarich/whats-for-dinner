@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-
+    <link type="text/css" rel="stylesheet" href="assets/style.css" />
+    <link rel='icon' href='favicon.ico' type='image/x-icon' />
     <title>What's for Dinner?</title>
 </head>
 
@@ -15,7 +16,8 @@
     <!--Top navigation for page-->
     <nav class="uk-navbar-container" uk-navbar>
         <!--Add a logo to the left of the page-->
-        <a href="#" class="uk-navbar-item uk-logo">What's For Dinner</a>
+        <a href="#" class="uk-navbar-item uk-logo"><img height="40" width="40" src="assets/images/wfd-logo.png" />
+            &nbsp;What's For Dinner</a>
         <!--Push preferences and signin to right side of page-->
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
@@ -26,21 +28,28 @@
             </ul>
         </div>
     </nav>
-    <div class="jumbotron">
-        <h1>Can't decide what's for dinner? Allow us!</h1>
-        <!-- Button to toggle the preferences modal-->
-        <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #preferences"
-            id="preference">Get Started</button>
-        <!-- Button to toggle the sign-in modal-->
-        <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #sign-in"
-            id="open">Sign-in</button>
+    <!--This is the jumbotron-->
+    <div class="uk-background-cover uk-height-large uk-panel uk-flex uk-flex-left uk-flex-middle"
+        style="background-image: url(assets/images/hero-image.jpg);">
+            <div class="uk-margin-medium-left">
+                <h1 class="uk-heading-medium uk-text-light uk-light">Can't decide what's for dinner?<br />Allow us!</h1>
+                <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and easy
+                    weekly menu generator.</p>
+                <!-- Button to toggle the sign-in modal-->
+                <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
+                    uk-toggle="target: #preferences" id="preference">Get Started</button>
+                <!-- Button to toggle the preferences modal-->
+                <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
+                    uk-toggle="target: #sign-in" id="open">Sign-in</button>
+            </div>
     </div>
 
     <!-- This is the sign-in modal-->
     <div id="sign-in" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <h2 class="uk-modal-title">Create an account</h2>
-            <p>With an account you can save your preferences, mark meals as favorites, and get more tailored meal results.</p>
+            <p>With an account you can save your preferences, mark meals as favorites, and get more tailored meal
+                results.</p>
             <div id="firebaseui-auth-container">
                 <!-- This is where the Login ui will load -->
             </div>
