@@ -16,6 +16,12 @@ $(document).on("click", "#meal-prefs", function () {
 })
 
 //makes the preference options for the health key
+// var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+// for (i=0; i<days.length; i++) {
+//     $(".daily").append($("<div></div>").addClass(".uk-card uk-card-primary").text(days[i]));
+// }  
+
+//makes the preference options for the health key
 var protein = ["chicken", "turkey", "beef", "pork", "fish", "shellfish", "tofu/soy", "egg", "other beans"]
 for (i=0; i<protein.length; i++) {
     $(".protein").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(protein[i]));
