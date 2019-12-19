@@ -1,5 +1,3 @@
-
-// Web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyBufhI3DF63sZuqtKWhmNMBBeDXDFhq5bU",
     authDomain: "whats-for-dinner-e745a.firebaseapp.com",
@@ -11,11 +9,10 @@ var firebaseConfig = {
     measurementId: "G-F50Y95R11R"
 };
 
-$(document).on("click", "#meal-prefs", function () {
-
-})
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-  
+
+$("#open").on("click", function () {
+    UIkit.modal("#sign-in").show();
+    console.log(UIkit.modal("#sign-in"));
+});
