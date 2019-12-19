@@ -5,10 +5,7 @@ const uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult(authResult, redirectUrl) {
             return true;
-        },
-        uiShown() {
-            document.getElementById('loader').style.display = 'none';
-        },
+        }
     },
     signInFlow: 'popup',
     signInSuccessUrl: 'signedIn',

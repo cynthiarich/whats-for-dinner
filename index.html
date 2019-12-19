@@ -5,52 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
     <title>What's for Dinner?</title>
 </head>
 
 <body>
-    <nav class="uk-navbar">
-        <a href="#" class="uk-navbar-brand">What's For Dinner</a>
-        <!--should return user to home page/index file-->
-        <div class="uk-navbar-flip">
+    <!--Top navigation for page-->
+    <nav class="uk-navbar-container" uk-navbar>
+        <!--Add a logo to the left of the page-->
+        <a href="#" class="uk-navbar-item uk-logo">What's For Dinner</a>
+        <!--Push preferences and signin to right side of page-->
+        <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
-                <li><a href="preferences.html">Preferences</a></li>
-                <!--this will open the modal-->
-                <li><a href="log-in.html">Log-in</a>
+                <!--Open preferences modal-->
+                <li><a href="preferences.html" uk-toggle>Preferences</a></li>
+                <!--Open signin modal-->
+                <li><a href="#sign-in" uk-toggle>Sign In</a></li>
             </ul>
         </div>
     </nav>
-
-
-    <div id="firebaseui-auth-container">
-        <!-- This is where the Login ui will load -->
+    <div class="jumbotron">
+        <h1>Can't decide what's for dinner? Allow us!</h1>
+        <!-- Button to toggle the preferences modal-->
+        <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #preferences"
+            id="preference">Get Started</button>
+        <!-- Button to toggle the sign-in modal-->
+        <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #sign-in"
+            id="open">Sign-in</button>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
-
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyBufhI3DF63sZuqtKWhmNMBBeDXDFhq5bU",
-            authDomain: "whats-for-dinner-e745a.firebaseapp.com",
-            databaseURL: "https://whats-for-dinner-e745a.firebaseio.com",
-            projectId: "whats-for-dinner-e745a",
-            storageBucket: "whats-for-dinner-e745a.appspot.com",
-            messagingSenderId: "290069514662",
-            appId: "1:290069514662:web:e28fcfe875a8334c542767",
-            measurementId: "G-F50Y95R11R"
-        };
-
-        // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
-    <!-- Firebase UI -->
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    <script src="./auth.js"></script>
+    <!-- This is the sign-in modal-->
+    <div id="sign-in" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">Create an account</h2>
+            <p>With an account you can save your preferences, mark meals as favorites, and get more tailored meal results.</p>
+            <div id="firebaseui-auth-container">
+                <!-- This is where the Login ui will load -->
+            </div>
+            <p class="uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Skip</button>
+            </p>
+        </div>
+    </div>
 
     <div>
         <!--content to be moved into modal-->
@@ -74,8 +72,18 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
+
     <script src="assets/script.js"></script>
+    <script src="./auth.js"></script>
+
 </body>
 
 </html>
