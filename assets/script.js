@@ -1,5 +1,3 @@
-
-// Web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyBufhI3DF63sZuqtKWhmNMBBeDXDFhq5bU",
     authDomain: "whats-for-dinner-e745a.firebaseapp.com",
@@ -33,7 +31,11 @@ for (i=0; i<preferences.length; i++) {
     $(".preference").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(preferences[i]));
 }  
 
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-  
+
+$("#open").on("click", function () {
+    UIkit.modal("#sign-in").show();
+    console.log(UIkit.modal("#sign-in"));
+});
