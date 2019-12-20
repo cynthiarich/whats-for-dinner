@@ -1,13 +1,18 @@
 //https://api.edamam.com/search?q=chicken&app_id=3e6eb808&app_key=320b9c0c25d10bd3661f72afc26368db&to=2
-var apiIdEdamam = "3e6eb808";
-var apikeyEdamam = "320b9c0c25d10bd3661f72afc26368db";
+var apiIdEdamam = "3e6eb808"; // api id for edamam
+var apikeyEdamam = "320b9c0c25d10bd3661f72afc26368db"; // api key for edamam
+var recipes; // array for the recipie info
 
-function loopArray(url, data)
+// loops through the array information received from the user
+function loopArray(data)
 {
-    console.log(data);
+    var url = "";
+
     for (var i = 0; i < data.length; i++)
     {
         url += data[i];
+
+        // adds a + sign after each element of the array other than the final element
         if (i + 1 < data.length)
         {
             url += "+"
@@ -17,32 +22,33 @@ function loopArray(url, data)
     return url;
 }
 
+// search function calling edamam to get recipes
 function search()
 {
     var queryURL = "https://api.edamam.com/search?";
-    console.log(queryURL);
-    retrieveData();
-    console.log(interestedFoods);
+    retrieveData(); // calls function to get user input
+
     queryURL += "q=";
 
-    queryURL = loopArray(queryURL, interestedFoods);
+    queryURL += loopArray(interestedFoods); 
     queryURL += "&app_id=" + apiIdEdamam + "&app_key=" + apikeyEdamam;
-    console.log(queryURL);
-    
 
+    /// adds data to url if there are element of dietOptionsUsed
     if (dietOptionsUsed.length > 0)
     {
         queryURL += "&diet=";
-        queryURL =loopArray(queryURL, dietOptionsUsed);
+        queryURL += loopArray(dietOptionsUsed);
     }
 
+    /// adds data to url if there are element of healthOptionsUsed
     if (healthOptionsUsed.length > 0)
     {
         queryURL += "&health=";
-        queryURL = loopArray(queryURL, healthOptionsUsed);
+        queryURL += loopArray(healthOptionsUsed);
     }
 
-    queryURL += "&to=2";
+    // gets the first 10 results from edamam
+    queryURL += "&to=10";
 
     $.ajax(
         {
@@ -50,8 +56,9 @@ function search()
             method: "GET"
         }).then(function(response)
         {
-            console.log(response);
-            $("<div>").text("check console");
+
+            hits = response.hits;
+            console.log(hits);
         });
 }
 
