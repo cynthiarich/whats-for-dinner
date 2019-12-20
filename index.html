@@ -22,7 +22,7 @@
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
                 <!--Open preferences modal-->
-                <li><a href="preferences.html" uk-toggle>Preferences</a></li>
+                <li><a href="#preference-modal" uk-toggle>Preferences</a></li>
                 <!--Open signin modal-->
                 <li><a href="#sign-in" uk-toggle>Sign In</a></li>
             </ul>
@@ -31,18 +31,18 @@
     <!--This is the jumbotron-->
     <div class="uk-background-cover uk-height-large uk-panel uk-flex uk-flex-left uk-flex-middle"
         style="background-image: url(assets/images/hero-image.jpg);">
-            <div class="uk-margin-medium-left">
-                <h1 class="uk-heading-medium uk-text-light uk-light">Can't decide what's for dinner?<br />Allow us!</h1>
-                <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and easy
-                    weekly menu generator.</p>
-                <!-- Button to toggle the sign-in modal-->
-                <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
-                    uk-toggle="target: #preferences" id="preference">Get Started</button>
-                <!-- Button to toggle the preferences modal-->
-                <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
-                    uk-toggle="target: #sign-in" id="open">Sign-in</button>
-            </div>
+        <div class="uk-margin-medium-left">
+            <h1 class="uk-heading-medium uk-text-light uk-light">Can't decide what's for dinner?<br />Allow us!</h1>
+            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and easy weekly menu generator.</p>
+            <!-- Button to toggle the sign-in modal-->
+            <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
+                uk-toggle="target: #preference-modal" id="preference">Get Started</button>
+            <!-- Button to toggle the preferences modal-->
+            <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
+                uk-toggle="target: #sign-in" id="open">Sign-in</button>
+        </div>
     </div>
+
 
     <!-- This is the sign-in modal-->
     <div id="sign-in" uk-modal>
@@ -59,26 +59,40 @@
         </div>
     </div>
 
-    <div>
-        <!--content to be moved into modal-->
-        <h1 class="uk-modal-title"> Select Your Dietary Preferences</h1>
-        <p>What proteins do you eat?</p>
-        <!-- chicken, pork, tofu/soy, beef, these answers need to be what is available in edmam -->
-        <p>Select Any Dietary Restrictions:</p>
-        <!--health label or key-->
-        <input class="uk-checkbox" type="checkbox"> <label>vegan</label>
-        <input class="uk-checkbox" type="checkbox"> <label>vegetarian</label>
-        <input class="uk-checkbox" type="checkbox"> <label>paleo</label>
-        <input class="uk-checkbox" type="checkbox"> <label>dairy-free</label>
-        <input class="uk-checkbox" type="checkbox"> <label>gluten-free</label>
-        <input class="uk-checkbox" type="checkbox"> <label>fat-free</label>
-        <input class="uk-checkbox" type="checkbox"> <label>low-sugar</label>
-        <input class="uk-checkbox" type="checkbox"> <label>egg-free</label>
-        <input class="uk-checkbox" type="checkbox"> <label>peanut-free</label>
-        <input class="uk-checkbox" type="checkbox"> <label>soy-free</label>
-        <input class="uk-checkbox" type="checkbox"> <label>shellfish-free</label>
+    <div class="uk-card">
+        <div class="uk-card uk-flex">
+            <h1 class="uk-card-title">Put date information here</h1>
+            <button class="uk-button uk-button-primary">Update my Menu</button>
+        </div>
+
+        <!-- replace card w/ 2 card inside OR divider below using for loop, one for each day -->
+        <div class="uk-card uk-flex">
+            <!-- This is the div when menu information will be entered - 2 cards-->
+
+            <!-- first card with day and date-->
+            <div class="uk-card uk-card-danger"> Monday
+                <hr class="uk-divider-horizontal">
+                <p>More stuff goes here</p>
+            </div>
+            <!-- second card with recipe name, ingredients, favorite, and refresh button -->
+            <div class="uk-card uk-card-default uk-margin-left">Recipe</div>
+
+        </div>
 
     </div>
+
+    <div id="preference-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">Select Your Dietary Preferences</h2>
+            <!-- edmam general ingredient search -->
+            <input class="uk-input" type="text" placeholder="How many people are eating? ">
+            <!-- edmam yield key-->
+            <p class="protein">What proteins do you eat?</p>
+            <!--health label or key-->
+            <p class="preference">Select Any Dietary Restrictions:</p>
+        </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
