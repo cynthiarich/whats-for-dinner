@@ -10,8 +10,5 @@ var healthOptionsUsed = [];
 // function to retrive data when user submits preferences
 function retrieveData()
 {
-    interestedFoods.push("chicken");
-    interestedFoods.push("beef");
-    dietOptionsUsed.push(dietOptions[0]);
-    healthOptionsUsed.push(healthOptions[5]);
+    
 } 
