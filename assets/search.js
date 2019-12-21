@@ -4,13 +4,13 @@ var apikeyEdamam = "320b9c0c25d10bd3661f72afc26368db"; // api key for edamam
 var recipes = []; // array for the recipie info
 
 // loops through the array information received from the user
-function loopArray(data)
+function loopArray(str, data)
 {
     var url = "";
 
-    for (var i = 1; i < data.length; i++)
+    for (var i = 0; i < data.length; i++)
     {
-        url += "&" + data[0] + "=" + data[i];
+        url += "&" + str + "=" + data[i];
     }
     
     return url;
@@ -27,15 +27,15 @@ function search()
         queryURL += "&app_id=" + apiIdEdamam + "&app_key=" + apikeyEdamam;
 
         /// adds data to url if there are element of dietOptionsUsed
-        if (dietOptionsUsed.length > 1)
+        if (dietOptionsUsed.length > 0)
         {
-            queryURL += loopArray(dietOptionsUsed);
+            queryURL += loopArray("diet", dietOptionsUsed);
         }
 
         /// adds health to url if there are element of healthOptionsUsed
-        if (healthOptionsUsed.length > 1)
+        if (healthOptionsUsed.length > 0)
         {
-            queryURL += loopArray(healthOptionsUsed);
+            queryURL += loopArray("health", healthOptionsUsed);
         }
 
         // gets the first 10 results from edamam
