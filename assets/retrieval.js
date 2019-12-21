@@ -10,17 +10,28 @@ function retrieveData()
 {
     proteinDiv.children(":checked").each(function()
     {
-        interestedFoods.push($(this).attr("data-protein"))
+        if (interestedFoods.indexOf($(this).attr("data-protein")) === -1){
+            interestedFoods.push($(this).attr("data-protein"));
+        }
+        
     });
     console.log(interestedFoods);
+
     dietDiv.children(":checked").each(function()
     {
-        dietOptionsUsed.push($(this).attr("data-diet"))
+        if (dietOptionsUsed.indexOf($(this).attr("data-diet")) === -1){
+            dietOptionsUsed.push($(this).attr("data-diet"));
+        }
+        
     });
     console.log(dietOptionsUsed);
-    healthOptionsUsed = healthDiv.children(":checked").each(function()
+
+    healthDiv.children(":checked").each(function()
     {
-        healthOptionsUsed.push($(this).attr("data-health"))
+        if (healthOptionsUsed.indexOf($(this).attr("data-health")) === -1){
+            healthOptionsUsed.push($(this).attr("data-health"));
+        }
+            
     });
     console.log(healthOptionsUsed);
 } 

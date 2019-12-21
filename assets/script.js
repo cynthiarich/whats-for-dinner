@@ -14,7 +14,7 @@ var firebaseConfig = {
 var protein = ["chicken", "turkey", "beef", "pork", "fish", "shellfish", "tofu/soy", "egg", "other beans"]
 var dietOptions = ["balanced", "high-protein", "low-fat", "low-carb"];
 var healthOptions = ["vegan", "vegetarian", "sugar-conscious", "peanut-free", "tree-nut-free", "alcohol-free"];
-
+var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 $(document).on("click", ".pref-btn", function () {
     //display the preference options for the health key
     for (var i = 0; i < protein.length; i++) {
@@ -43,7 +43,36 @@ $(document).on("click", ".pref-btn", function () {
         dietDiv.append(input);
         dietDiv.append($("<label>").text(dietOptions[i]));
     }
-})
+});
+
+function createMenu(){
+    $("#weekdisplay").empty();
+    $("#weekdisplay").append($("<button>").attr("class", "uk-button uk-button-default uk-width-1-2 menu-update").text("Create a new menu"));
+    for (var i = 0; i < days.length; i++){
+        var newCard = $("<div>").attr("class", "uk-card uk-card-default uk-width-1-1");
+        var cardHead = $("<div>").attr("class", "uk-card-header");
+        newCard.append(cardHead);
+        var cardTitle = $("<h3>").attr("class", "uk-card-title").text(days[i]);
+        cardHead.append(cardTitle);
+        
+        var cardBody = $("<div>").attr("class", "uk-card-body");
+        newCard.append(cardBody);
+
+        var ul = ($("<ul>").attr("uk-accordian", ""));
+        var li = ($("<li>"));
+        ul.append(li);
+
+        var recipeTitle = $("<a>").attr("class", "uk-accordion-title").attr("href", "#").text("Recipe Title");
+        li.append(recipeTitle);
+
+        var recipe = $("<div>").attr("class", "uk-accordion-content");
+        recipe.append($("<p>").text("This is the recipe for " + days[i]));
+        li.append(recipe);
+        cardBody.append(ul);
+        
+        $("#weekdisplay").append(newCard);
+    }
+};
 
 
 // Initialize Firebase
@@ -55,3 +84,5 @@ $("#open").on("click", function () {
 });
 
 $(".save-prefs").on("click", retrieveData);
+
+$(".menu-update").on("click", createMenu);
