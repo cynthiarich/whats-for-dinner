@@ -1,6 +1,9 @@
 var interestedFoods = [];
 var dietOptionsUsed = [];
 var healthOptionsUsed = [];
+var proteinDiv = $(".protein");
+var dietDiv = $(".diet-preference");
+var healthDiv = $(".health-preference");
 
 // function to retrive data when user submits preferences
 function retrieveData()

@@ -22,7 +22,7 @@
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
                 <!--Open preferences modal-->
-                <li><a href="#preference-modal" uk-toggle>Preferences</a></li>
+                <li><a href="#preference-modal" class="pref-btn" uk-toggle>Preferences</a></li>
                 <!--Open signin modal-->
                 <li><a href="#sign-in" uk-toggle>Sign In</a></li>
             </ul>
@@ -34,10 +34,10 @@
         <div class="uk-margin-medium-left">
             <h1 class="uk-heading-medium uk-text-light uk-light">Can't decide what's for dinner?<br />Allow us!</h1>
             <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and easy weekly menu generator.</p>
-            <!-- Button to toggle the sign-in modal-->
-            <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
-                uk-toggle="target: #preference-modal" id="preference">Get Started</button>
             <!-- Button to toggle the preferences modal-->
+            <button class="uk-button uk-button-default uk-margin-small-right uk-light pref-btn" type="button"
+                uk-toggle="target: #preference-modal">Get Started</button>
+            <!-- Button to toggle the sign-in modal-->
             <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
                 uk-toggle="target: #sign-in" id="open">Sign-in</button>
         </div>
@@ -89,7 +89,12 @@
             <!-- edmam yield key-->
             <p class="protein">What proteins do you eat?</p>
             <!--health label or key-->
-            <p class="preference">Select Any Dietary Restrictions:</p>
+            <p class="diet-preference">Select Any Dietary Restrictions:</p>
+            <!--health label or key-->
+            <p class="health-preference">Select Any Dietary Restrictions:</p>
+            <p class="uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close save-prefs" type="button">Save</button>
+            </p>
         </div>
     </div>
 
@@ -104,10 +109,11 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
 
-    <script src="assets/script.js"></script>
-    <script src="./auth.js"></script>
     <script src="assets/retrieval.js"></script>
     <script src="assets/search.js"></script>
+    <script src="assets/script.js"></script>
+    <script src="./auth.js"></script>
+    
 
 </body>
 
