@@ -9,27 +9,41 @@ var firebaseConfig = {
     measurementId: "G-F50Y95R11R"
 };
 
-$(document).on("click", "#meal-prefs", function () {
 
-})
-
-//makes the preference options for the health key
-// var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-// for (i=0; i<days.length; i++) {
-//     $(".daily").append($("<div></div>").addClass(".uk-card uk-card-primary").text(days[i]));
-// }  
-
-//makes the preference options for the health key
+// vars to hold search options
 var protein = ["chicken", "turkey", "beef", "pork", "fish", "shellfish", "tofu/soy", "egg", "other beans"]
-for (i=0; i<protein.length; i++) {
-    $(".protein").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(protein[i]));
-}  
+var dietOptions = ["balanced", "high-protein", "low-fat", "low-carb"];
+var healthOptions = ["vegan", "vegetarian", "sugar-conscious", "peanut-free", "tree-nut-free", "alcohol-free"];
 
-//makes the preference options for the health key
-var preferences = ["vegan", "vegetarian", "paleo", "dairy-free", "gluten-free", "fat-free", "low-sugar", "egg-free", "peanut-free", "soy-free", "shellfish-free"]
-for (i=0; i<preferences.length; i++) {
-    $(".preference").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(preferences[i]));
-}  
+$(document).on("click", ".pref-btn", function () {
+    //display the preference options for the health key
+    for (var i = 0; i < protein.length; i++) {
+        var input = $("<input>");
+        input.addClass("uk-checkbox");
+        input.attr("type", "checkbox");
+        input.attr("data-protein", protein[i]);
+        proteinDiv.append(input);
+        proteinDiv.append($("<label>").text(protein[i]));
+    }
+
+    for (var i = 0; i < healthOptions.length; i++) {
+        var input = $("<input>");
+        input.addClass("uk-checkbox");
+        input.attr("type", "checkbox");
+        input.attr("data-health", healthOptions[i]);
+        healthDiv.append(input);
+        healthDiv.append($("<label>").text(healthOptions[i]));
+
+    }
+    for (var i = 0; i < dietOptions.length; i++) {
+        var input = $("<input>");
+        input.addClass("uk-checkbox");
+        input.attr("type", "checkbox");
+        input.attr("data-diet", dietOptions[i]);
+        dietDiv.append(input);
+        dietDiv.append($("<label>").text(dietOptions[i]));
+    }
+})
 
 
 // Initialize Firebase
@@ -39,3 +53,5 @@ $("#open").on("click", function () {
     UIkit.modal("#sign-in").show();
     console.log(UIkit.modal("#sign-in"));
 });
+
+$(".save-prefs").on("click", retrieveData);
