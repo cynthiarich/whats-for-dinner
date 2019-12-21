@@ -15,6 +15,8 @@ var protein = ["chicken", "turkey", "beef", "pork", "fish", "shellfish", "tofu/s
 var dietOptions = ["balanced", "high-protein", "low-fat", "low-carb"];
 var healthOptions = ["vegan", "vegetarian", "sugar-conscious", "peanut-free", "tree-nut-free", "alcohol-free"];
 var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+var activities = ["Education", "Recreational", "Social", "DIY", "Charity", "Cooking", "Relaxation", "Music", "Busywork"]
+
 $(document).on("click", ".pref-btn", function () {
     //display the preference options for the health key
     for (var i = 0; i < protein.length; i++) {
@@ -35,6 +37,7 @@ $(document).on("click", ".pref-btn", function () {
         healthDiv.append($("<label>").text(healthOptions[i]));
 
     }
+
     for (var i = 0; i < dietOptions.length; i++) {
         var input = $("<input>");
         input.addClass("uk-checkbox");
@@ -69,10 +72,18 @@ function createMenu(){
         recipe.append($("<p>").text("This is the recipe for " + days[i]));
         li.append(recipe);
         cardBody.append(ul);
+        //create drop-down in body of daily menu div
+        cardBody.append($("<button>").attr("id", "activity").text("Hold For Activity Select");
         
         $("#weekdisplay").append(newCard);
     }
 };
+
+
+//values need to pull from Edmam response
+//recipe name: hits[0].recipe.label returns a string
+//image: hits[0].recipe.image returns a jpg link
+//ingredients: hits[0].recipe.ingredientLines returns an array of strings
 
 
 // Initialize Firebase
