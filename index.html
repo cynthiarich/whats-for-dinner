@@ -33,7 +33,8 @@
         style="background-image: url(assets/images/hero-image.jpg);">
         <div class="uk-margin-medium-left">
             <h1 class="uk-heading-medium uk-text-light uk-light">Can't decide what's for dinner?<br />Allow us!</h1>
-            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and easy weekly menu generator.</p>
+            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and
+                easy weekly menu generator.</p>
             <!-- Button to toggle the preferences modal-->
             <button class="uk-button uk-button-default uk-margin-small-right uk-light pref-btn" type="button"
                 uk-toggle="target: #preference-modal">Get Started</button>
@@ -59,26 +60,8 @@
         </div>
     </div>
 
-    <div class="uk-card">
-        <div class="uk-card uk-flex">
-            <h1 class="uk-card-title">Put date information here</h1>
-            <button class="uk-button uk-button-primary">Update my Menu</button>
-        </div>
-
-        <!-- replace card w/ 2 card inside OR divider below using for loop, one for each day -->
-        <div class="uk-card uk-flex">
-            <!-- This is the div when menu information will be entered - 2 cards-->
-
-            <!-- first card with day and date-->
-            <div class="uk-card uk-card-danger"> Monday
-                <hr class="uk-divider-horizontal">
-                <p>More stuff goes here</p>
-            </div>
-            <!-- second card with recipe name, ingredients, favorite, and refresh button -->
-            <div class="uk-card uk-card-default uk-margin-left">Recipe</div>
-
-        </div>
-
+    <div id="weekdisplay"> 
+        <!-- This is the display area for the days -->
     </div>
 
     <div id="preference-modal" uk-modal>
@@ -87,11 +70,18 @@
             <!-- edmam general ingredient search -->
             <input class="uk-input" type="text" placeholder="How many people are eating? ">
             <!-- edmam yield key-->
-            <p class="protein">What proteins do you eat?</p>
-            <!--health label or key-->
-            <p class="diet-preference">Select Any Dietary Restrictions:</p>
-            <!--health label or key-->
-            <p class="health-preference">Select Any Dietary Restrictions:</p>
+            <div class="protein modal-list">
+                <h5 class="uk-heading-line uk-text-center"><span>What proteins do you eat?</span></h5>
+                <!--list proteins here-->
+            </div>
+            <div class="diet-preference modal-list">
+                <h5 class="uk-heading-line uk-text-center"><span>Describe your diet:</span></h5>
+                <!--list diet preferences here-->
+            </div>
+            <div class="health-preference modal-list">
+                <h5 class="uk-heading-line uk-text-center"><span>Select any dietary restrictions:</span></h5>
+                <!--list health preferences-->
+            </div>
             <p class="uk-text-right">
                 <button class="uk-button uk-button-default uk-modal-close save-prefs" type="button">Save</button>
             </p>
@@ -113,7 +103,6 @@
     <script src="assets/search.js"></script>
     <script src="assets/script.js"></script>
     <script src="./auth.js"></script>
-    
 
 </body>
 
