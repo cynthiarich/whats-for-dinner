@@ -33,7 +33,8 @@
         style="background-image: url(assets/images/hero-image.jpg);">
         <div class="uk-margin-medium-left">
             <h1 class="uk-heading-medium uk-text-light uk-light">Can't decide what's for dinner?<br />Allow us!</h1>
-            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and easy weekly menu generator.</p>
+            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and
+                easy weekly menu generator.</p>
             <!-- Button to toggle the sign-in modal-->
             <button class="uk-button uk-button-default uk-margin-small-right uk-light" type="button"
                 uk-toggle="target: #preference-modal" id="preference">Get Started</button>
@@ -59,53 +60,196 @@
         </div>
     </div>
 
-    <div class="uk-card">
-        <div class="uk-card uk-flex">
-            <h1 class="uk-card-title">Put date information here</h1>
-            <button class="uk-button uk-button-primary">Update my Menu</button>
-        </div>
-
-        <!-- replace card w/ 2 card inside OR divider below using for loop, one for each day -->
-        <div class="uk-card uk-flex">
-            <!-- This is the div when menu information will be entered - 2 cards-->
-
-            <!-- first card with day and date-->
-            <div class="uk-card uk-card-danger"> Monday
-                <hr class="uk-divider-horizontal">
-                <p>More stuff goes here</p>
+    <!-- This is the display area for the days -->
+    <div id="weekdisplay">
+        <!--Monday card-->
+        <div class="uk-card uk-card-default uk-width-1-1">
+            <div class="uk-card-header">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <!--<img class="uk-border-circle" width="40" height="40" src="assets/images/m-icon.png">-->
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-card-title uk-margin-remove-bottom">Monday</h3>
+                    </div>
+                </div>
             </div>
-            <!-- second card with recipe name, ingredients, favorite, and refresh button -->
-            <div class="uk-card uk-card-default uk-margin-left">Recipe</div>
-
+            <div class="uk-card-body">
+                <ul uk-accordion="multiple: true">
+                    <li>
+                        <a class="uk-accordion-title" href="#">Recipe Title</a>
+                        <div class="uk-accordion-content">
+                            <p> This is the Monday Recipe</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-
+        <!--Tuesday card-->
+        <div class="uk-card uk-card-default uk-width-1-1">
+                <div class="uk-card-header">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <!-- <img class="uk-border-circle" width="40" height="40" src="assets/images/t-icon.png"> -->
+                        </div>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Tuesday</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    <ul uk-accordion="multiple: true">
+                        <li>
+                            <a class="uk-accordion-title" href="#">Recipe Title</a>
+                            <div class="uk-accordion-content">
+                                <p> This is the Tuesday Recipe</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--Wednesday card-->
+        <div class="uk-card uk-card-default uk-width-1-1">
+                <div class="uk-card-header">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <!-- <img class="uk-border-circle" width="40" height="40" src="assets/images/w-icon.png"> -->
+                        </div>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Wednesday</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    <ul uk-accordion="multiple: true">
+                        <li>
+                            <a class="uk-accordion-title" href="#">Recipe Title</a>
+                            <div class="uk-accordion-content">
+                                <p> This is the Wednesday Recipe</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+             <!--Thursday card-->
+        <div class="uk-card uk-card-default uk-width-1-1">
+                <div class="uk-card-header">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <!-- <img class="uk-border-circle" width="40" height="40" src="assets/images/t-icon.png"> -->
+                        </div>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Thursday</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    <ul uk-accordion="multiple: true">
+                        <li>
+                            <a class="uk-accordion-title" href="#">Recipe Title</a>
+                            <div class="uk-accordion-content">
+                                <p> This is the Thursday Recipe</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--Friday card-->
+        <div class="uk-card uk-card-primary uk-width-1-1">
+                <div class="uk-card-header">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Friday</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    <ul uk-accordion="multiple: true">
+                        <li>
+                            <a class="uk-accordion-title" href="#">Recipe Title</a>
+                            <div class="uk-accordion-content">
+                                <p> This is the Friday Recipe</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--Saturday card-->
+        <div class="uk-card uk-card-default uk-width-1-1">
+                <div class="uk-card-header">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <!-- <img class="uk-border-circle" width="40" height="40" src="assets/images/s-icon.png"> -->
+                        </div>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Saturday</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    <ul uk-accordion="multiple: true">
+                        <li>
+                            <a class="uk-accordion-title" href="#">Recipe Title</a>
+                            <div class="uk-accordion-content">
+                                <p> This is the Saturday Recipe</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--Saturday card-->
+        <div class="uk-card uk-card-default uk-width-1-1">
+                <div class="uk-card-header">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <!-- <img class="uk-border-circle" width="40" height="40" src="assets/images/s-icon.png"> -->
+                        </div>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Sunday</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    <ul uk-accordion="multiple: true">
+                        <li>
+                            <a class="uk-accordion-title" href="#">Recipe Title</a>
+                            <div class="uk-accordion-content">
+                                <p> This is the Sunday Recipe</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
     </div>
 
-    <div id="preference-modal" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-            <h2 class="uk-modal-title">Select Your Dietary Preferences</h2>
-            <!-- edmam general ingredient search -->
-            <input class="uk-input" type="text" placeholder="How many people are eating? ">
-            <!-- edmam yield key-->
-            <p class="protein">What proteins do you eat?</p>
-            <!--health label or key-->
-            <p class="preference">Select Any Dietary Restrictions:</p>
+
+
+
+        <div id="preference-modal" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">Select Your Dietary Preferences</h2>
+                <!-- edmam general ingredient search -->
+                <input class="uk-input" type="text" placeholder="How many people are eating? ">
+                <!-- edmam yield key-->
+                <p class="protein">What proteins do you eat?</p>
+                <!--health label or key-->
+                <p class="preference">Select Any Dietary Restrictions:</p>
+            </div>
         </div>
-    </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
 
-    <script src="assets/script.js"></script>
-    <script src="./auth.js"></script>
+        <script src="assets/script.js"></script>
+        <script src="./auth.js"></script>
 
 </body>
 
