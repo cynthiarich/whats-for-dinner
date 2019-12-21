@@ -13,23 +13,28 @@ $(document).on("click", "#meal-prefs", function () {
 
 })
 
-//makes the preference options for the health key
-// var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-// for (i=0; i<days.length; i++) {
-//     $(".daily").append($("<div></div>").addClass(".uk-card uk-card-primary").text(days[i]));
-// }  
-
-//makes the preference options for the health key
+//makes the preference options for the health key (Edmam API)
 var protein = ["chicken", "turkey", "beef", "pork", "fish", "shellfish", "tofu/soy", "egg", "other beans"]
 for (i=0; i<protein.length; i++) {
     $(".protein").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(protein[i]));
 }  
 
-//makes the preference options for the health key
+//makes the preference options for the health key (Edmam API)
 var preferences = ["vegan", "vegetarian", "paleo", "dairy-free", "gluten-free", "fat-free", "low-sugar", "egg-free", "peanut-free", "soy-free", "shellfish-free"]
 for (i=0; i<preferences.length; i++) {
     $(".preference").append($("<input>").addClass("uk-checkbox").attr("type", "checkbox")).append($("<label></label>").text(preferences[i]));
 }  
+
+//makes the preference options for the activities from Bored API
+var activities = ["Education", "Recreational", "Social", "DIY", "Charity", "Cooking", "Relaxation", "Music", "Busywork"]
+for (i=0; i<preferences.length; i++) {
+    //create drop-down in body of daily menu div
+} 
+
+//values need to pull from Edmam response
+//recipe name: hits[0].recipe.label returns a string
+//image: hits[0].recipe.image returns a jpg link
+//ingredients: hits[0].recipe.ingredientLines returns an array of strings
 
 
 // Initialize Firebase
