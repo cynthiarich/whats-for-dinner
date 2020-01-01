@@ -18,33 +18,72 @@ var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", 
 var activities = ["Education", "Recreational", "Social", "DIY", "Charity", "Cooking", "Relaxation", "Music", "Busywork"]
 
 $(document).on("click", ".pref-btn", function () {
+    proteinDiv.empty();
+    healthDiv.empty();
+    dietDiv.empty();
+    //get previous responses from local storage
+    if (localStorage.getItem("interestedFoods") !== null){
+        interestedFoods = JSON.parse(localStorage.getItem("interestedFoods"));
+    }
+    if (localStorage.getItem("dietOptionsUsed") !== null){
+        dietOptionsUsed = JSON.parse(localStorage.getItem("dietOptionsUsed"));
+    }
+    if (localStorage.getItem("healthOptionsUsed") !== null){
+        healthOptionsUsed = JSON.parse(localStorage.getItem("healthOptionsUsed"));
+    }
+    if (localStorage.getItem("numServings") !== null){
+        numServings = localStorage.getItem("numServings");
+    }
+    //add previously selected number of servings
+    $('.servings').val(numServings);
     //display the preference options for the health key
     for (var i = 0; i < protein.length; i++) {
+        var label = $("<label>");
+        proteinDiv.append(label);
         var input = $("<input>");
         input.addClass("uk-checkbox");
+        input.addClass("uk-checkbox modal-checkbox");
         input.attr("type", "checkbox");
         input.attr("data-protein", protein[i]);
-        proteinDiv.append(input);
-        proteinDiv.append($("<label>").text(protein[i]));
+        if (interestedFoods.indexOf(protein[i]) !== -1){
+            input.attr("checked", "");
+        }
+        label.append(input);
+        label.append(protein[i]);
+        label.append($("<br>"));
     }
 
     for (var i = 0; i < healthOptions.length; i++) {
+        var label = $("<label>");
+        healthDiv.append(label);
         var input = $("<input>");
         input.addClass("uk-checkbox");
+        input.addClass("uk-checkbox modal-checkbox");
         input.attr("type", "checkbox");
         input.attr("data-health", healthOptions[i]);
-        healthDiv.append(input);
-        healthDiv.append($("<label>").text(healthOptions[i]));
+        if (healthOptionsUsed.indexOf(healthOptions[i]) !== -1){
+            input.attr("checked", "");
+        }
+        label.append(input);
+        label.append(healthOptions[i]);
+        label.append($("<br>"));
 
     }
 
     for (var i = 0; i < dietOptions.length; i++) {
+        var label = $("<label>");
+        dietDiv.append(label);
         var input = $("<input>");
         input.addClass("uk-checkbox");
+        input.addClass("uk-checkbox modal-checkbox");
         input.attr("type", "checkbox");
         input.attr("data-diet", dietOptions[i]);
-        dietDiv.append(input);
-        dietDiv.append($("<label>").text(dietOptions[i]));
+        if (dietOptionsUsed.indexOf(dietOptions[i]) !== -1){
+            input.attr("checked", "");
+        }
+        label.append(input);
+        label.append(dietOptions[i]);
+        label.append($("<br>"));
     }
 });
 
@@ -73,7 +112,7 @@ function createMenu(){
         li.append(recipe);
         cardBody.append(ul);
         //create drop-down in body of daily menu div
-        cardBody.append($("<button>").attr("id", "activity").text("Hold For Activity Select");
+        cardBody.append($("<button>").attr("id", "activity").text("Hold For Activity Select"));
         
         $("#weekdisplay").append(newCard);
     }
@@ -94,6 +133,9 @@ $("#open").on("click", function () {
     console.log(UIkit.modal("#sign-in"));
 });
 
-$(".save-prefs").on("click", retrieveData);
+$(".save-prefs").on("click", function () {
+    
+    retrieveData();
+});
 
 $(".menu-update").on("click", createMenu);
