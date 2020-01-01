@@ -133,9 +133,6 @@ $("#open").on("click", function () {
     console.log(UIkit.modal("#sign-in"));
 });
 
-$(".save-prefs").on("click", function () {
-    
-    retrieveData();
-});
+$(".save-prefs").on("click", retrieveData);
 
 $(".menu-update").on("click", createMenu);
