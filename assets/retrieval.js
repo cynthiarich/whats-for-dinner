@@ -9,6 +9,7 @@ var healthDiv = $(".health-preference");
 // function to retrive data when user submits preferences
 function retrieveData()
 {
+    var prefsChanged = false;
     //update number of servings
     numServings = $('.servings').val();
     localStorage.setItem("numServings", numServings);
@@ -21,12 +22,14 @@ function retrieveData()
         if ($(this).is(":checked")) {
 
             if (interestedFoods.indexOf(selected) === -1){
+                prefsChanged = true;
                 interestedFoods.push(selected);
             }
         }
         //if it is not selected, check to see if should be removed from the array
         else {
             if (interestedFoods.indexOf(selected) !== -1){
+                prefsChanged = true;
                 interestedFoods.splice(interestedFoods.indexOf(selected), 1);
             }
         }
@@ -44,12 +47,14 @@ function retrieveData()
         if ($(this).is(":checked")) {
             
             if (dietOptionsUsed.indexOf(selected) === -1){
+                prefsChanged = true;
                 dietOptionsUsed.push(selected);
             }
         }
         //if it is not selected, check to see if should be removed from the array
         else {
             if (dietOptionsUsed.indexOf(selected) !== -1){
+                prefsChanged = true;
                 dietOptionsUsed.splice(dietOptionsUsed.indexOf(selected), 1);
             }
         }
@@ -66,12 +71,14 @@ function retrieveData()
         if ($(this).is(":checked")) {
 
             if (healthOptionsUsed.indexOf(selected) === -1){
+                prefsChanged = true;
                 healthOptionsUsed.push(selected);
             }
         }
         //if it is not selected, check to see if should be removed from the array
         else {
             if (healthOptionsUsed.indexOf(selected) !== -1){
+                prefsChanged = true;
                 healthOptionsUsed.splice(healthOptionsUsed.indexOf(selected), 1);
             }
         }
@@ -80,5 +87,8 @@ function retrieveData()
 
     console.log("healthOptions: " + healthOptionsUsed);
     localStorage.setItem("healthOptionsUsed", JSON.stringify(healthOptionsUsed));
-    search();
+    if (prefsChanged){
+        search();
+    }
+    
 } 
