@@ -20,6 +20,7 @@ var lastSearch;
 var recipesAvail = [];
 var lastRecipes = [];
 var searchResults = [];
+var shoppingList = [];
 
 function initApp() {
     //get previous responses from local storage
@@ -44,6 +45,9 @@ function initApp() {
             console.log("let's use our previous " + lastRecipes.length + " search results: " + lastRecipes);
             createPrevMenu();
         }
+    }
+    if (localStorage.getItem("shoppingList") !== null) {
+        shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
     }
 }
 
@@ -126,16 +130,23 @@ function makeCard(data, day) {
     //add card title
     var cardTitle = $("<h3>").attr("class", "uk-card-title").text(day + ": " + data.label);
     var recipeSrc = $("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html("See the full recipe at: <a href=" + data.url + ">" + data.source + "</a>");
-    
+    //add buttons for favorites and swaps
+    var favBtn = $("<button>").attr("class", "uk-icon-button uk-margin-small-right favorite-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Save to favorites; pos: top").attr("uk-icon", "heart");
+    var swapBtn = $("<button>").attr("class", "uk-icon-button swap-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Swap this recipe; pos: top").attr("uk-icon", "refresh");
+
     //set up the ul for the ingredient list
     var ul = $("<ul>").attr("class", "uk-list uk-list-divider");
     //add ingredients
     for (var j = 0; j < data.ingredientLines.length; j++) {
-        ul.append($("<li>").text(data.ingredientLines[j]));
+        var li = $("<li>").text(data.ingredientLines[j]);
+        ul.append(li);
+        li.append($("<button>").attr("ingred-data", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-left shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
     }
 
     cardBody.append(cardTitle);
     cardBody.append(recipeSrc);
+    cardBody.append(favBtn);
+    cardBody.append(swapBtn);
     cardBody.append(ul);
     simpDiv.append(cardBody);
     newCard.append(simpDiv);
@@ -171,6 +182,42 @@ function createPrevMenu(){
     }
 }
 
+function saveFavorites(){
+    console.log("Save this to favorites: ", $(this).attr("recipe-data"));
+}
+
+function swapRecipe() {
+    console.log("Swap this recipe: ", $(this).attr("recipe-data"));
+}
+
+function createList(){
+    console.log("Add this ingredient to the shopping list: ", $(this).attr("ingred-data"));
+    shoppingList.push($(this).attr("ingred-data"));
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+}
+
+function emptyList(){
+    $("#my-shopping-list").empty();
+    shoppingList = [];
+    localStorage.removeItem("shoppingList");
+}
+
+
+$(document).on("click", ".shop-list-btn", function() {
+    //empty the shopping list div
+    $("#my-shopping-list").empty();
+    console.log(shoppingList);
+    //loop through to create li's
+    if (shoppingList.length >= 1){
+        for (var i = 0; i < shoppingList.length; i++){
+            $("#my-shopping-list").append($("<li>").text(shoppingList[i]));
+        };
+    }
+    else {
+        $("#my-shopping-list").append($("<li>").text("Your shopping list is currently empty. Select items from the weekly menu to add to your shopping list."));
+    }
+      
+});
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -184,3 +231,11 @@ $("#open").on("click", function () {
 $(".save-prefs").on("click", retrieveData);
 
 $(".menu-update").on("click", searchEdamam);
+
+$(".favorite-btn").on("click", saveFavorites);
+
+$(".swap-btn").on("click", swapRecipe);
+
+$(".shopping-btn").on("click", createList);
+
+$(".empty-list").on("click", emptyList);

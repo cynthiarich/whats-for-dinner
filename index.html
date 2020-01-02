@@ -23,6 +23,8 @@
             <ul class="uk-navbar-nav">
                 <!--Open preferences modal-->
                 <li><a href="#preference-modal" class="pref-btn" uk-toggle>Preferences</a></li>
+                <!--Open shopping list offcanvas-->
+                <li><a href="#shopping-list" class="shop-list-btn" uk-toggle>Shopping List</a></li>
                 <!--Open signin modal-->
                 <li><a href="#sign-in" uk-toggle>Sign In</a></li>
             </ul>
@@ -63,7 +65,8 @@
             <button class="uk-button uk-button-default uk-align-center uk-width-1-2 menu-update">Create my menu</button>
             <!-- This is the display area for the days -->
     </div>
-
+    
+    <!-- This is the modal to set preferences-->
     <div id="preference-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <h2 class="uk-modal-title">Select Your Dietary Preferences</h2>
@@ -102,6 +105,23 @@
             </p>
         </div>
     </div>
+
+    <!-- This is the off-canvas element to hold the shopping list-->
+    <div id="shopping-list" uk-offcanvas>
+        <div class="uk-offcanvas-bar uk-background-primary">
+    
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+    
+            <h3>Your Shopping List</h3>
+    
+            <ul class="uk-list uk-list-divider" id="my-shopping-list">
+            </ul>
+
+            <button class="uk-button uk-button-default empty-list">Empty Shopping List</button>
+    
+        </div>
+    </div>
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
