@@ -1,7 +1,6 @@
 var interestedFoods = [];
 var dietOptionsUsed = [];
 var healthOptionsUsed = [];
-var numServings;
 var proteinDiv = $(".protein");
 var dietDiv = $(".diet-preference");
 var healthDiv = $(".health-preference");
@@ -10,9 +9,6 @@ var healthDiv = $(".health-preference");
 function retrieveData()
 {
     var prefsChanged = false;
-    //update number of servings
-    numServings = $('.servings').val();
-    localStorage.setItem("numServings", numServings);
 
     //update proteins selected
     $('.protein input[type="checkbox"]').each(function()
@@ -88,7 +84,7 @@ function retrieveData()
     console.log("healthOptions: " + healthOptionsUsed);
     localStorage.setItem("healthOptionsUsed", JSON.stringify(healthOptionsUsed));
     if (prefsChanged){
-        search();
+        searchEdamam();
     }
     
 } 
