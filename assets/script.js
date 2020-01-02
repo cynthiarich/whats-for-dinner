@@ -16,8 +16,10 @@ var dietOptions = ["balanced", "high-protein", "low-fat", "low-carb"];
 var healthOptions = ["vegan", "vegetarian", "sugar-conscious", "peanut-free", "tree-nut-free", "alcohol-free"];
 var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 var activities = ["Education", "Recreational", "Social", "DIY", "Charity", "Cooking", "Relaxation", "Music", "Busywork"];
+var lastSearch;
 var recipesAvail = [];
 var lastRecipes = [];
+var searchResults = [];
 
 function initApp() {
     //get previous responses from local storage
@@ -30,6 +32,19 @@ function initApp() {
     if (localStorage.getItem("healthOptionsUsed") !== null) {
         healthOptionsUsed = JSON.parse(localStorage.getItem("healthOptionsUsed"));
     }
+    if (localStorage.getItem("lastSearch") !== null) {
+        console.log("last search was: " + localStorage.getItem("lastSearch"));
+        lastSearch = localStorage.getItem("lastSearch");
+        if (moment(lastSearch).isBefore(moment().subtract(7, 'days'))) {
+            console.log("let's search again");
+            searchEdamam();
+        }
+        else {
+            lastRecipes = JSON.parse(localStorage.getItem("lastRecipes"));
+            console.log("let's use our previous " + lastRecipes.length + " search results: " + lastRecipes);
+            createPrevMenu();
+        }
+    }
 }
 
 $(document).on("click", ".pref-btn", function () {
@@ -37,8 +52,6 @@ $(document).on("click", ".pref-btn", function () {
     healthDiv.empty();
     dietDiv.empty();
 
-    //add previously selected number of servings
-    $('.servings').val(numServings);
     //display the preference options for the health key
     for (var i = 0; i < protein.length; i++) {
         var label = $("<label>");
@@ -89,63 +102,74 @@ $(document).on("click", ".pref-btn", function () {
     }
 });
 
-function createMenu(response) {
+function createMenuFramework() {
     //clear previous display
     $("#weekdisplay").empty();
     //add the button to refresh the menu
     $("#weekdisplay").append($("<button>").attr("class", "uk-button uk-button-default uk-align-center uk-width-1-2 menu-update").text("Refresh my menu"));
+
+}
+
+function makeCard(data, day) {
+    var newCard = $("<div>").attr("class", "uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin").attr("uk-grid", "").attr("uk-scrollspy", "cls: uk-animation-slide-right; repeat: true");
     
+    //add image of recipe
+    var picDiv = $("<div>").attr("class", "uk-card-media-left uk-cover-container");
+    picDiv.append($("<img>").attr("src", data.image).attr("alt", data.label).attr("uk-cover", ""));
+    picDiv.append($("<canvas>").attr("width", "600").attr("height", "400"));
+    newCard.append(picDiv);
+    
+    //add body of card
+    var simpDiv = $("<div>");
+    var cardBody = $("<div>").attr("class", "uk-card-body");
+    
+    //add card title
+    var cardTitle = $("<h3>").attr("class", "uk-card-title").text(day + ": " + data.label);
+    var recipeSrc = $("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html("See the full recipe at: <a href=" + data.url + ">" + data.source + "</a>");
+    
+    //set up the ul for the ingredient list
+    var ul = $("<ul>").attr("class", "uk-list uk-list-divider");
+    //add ingredients
+    for (var j = 0; j < data.ingredientLines.length; j++) {
+        ul.append($("<li>").text(data.ingredientLines[j]));
+    }
+
+    cardBody.append(cardTitle);
+    cardBody.append(recipeSrc);
+    cardBody.append(ul);
+    simpDiv.append(cardBody);
+    newCard.append(simpDiv);
+    $("#weekdisplay").append(newCard);
+}
+
+function createNewMenu(response) {
+
+    createMenuFramework();
+    for (var h = 0; h < searchResults.length; h++) {
+        recipesAvail.push(h);
+    }
     //loop through the response JSON and add the recipes
     for (var i = 0; i < days.length; i++) {
+        
         //get random recipe from available options
         var arrPos = Math.floor(Math.random() * recipesAvail.length);
         var recipeNum = recipesAvail[arrPos];
         recipesAvail.splice(arrPos, 1);
 
         //create card div
-        var newCard = $("<div>").attr("class", "uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin").attr("uk-grid", "").attr("uk-scrollspy", "cls: uk-animation-slide-right; repeat: true");
-        //add image of recipe
-        var picDiv = $("<div>").attr("class", "uk-card-media-left uk-cover-container");
-        picDiv.append($("<img>").attr("src", response.hits[recipeNum].recipe.image).attr("alt", response.hits[recipeNum].recipe.label).attr("uk-cover", ""));
-        picDiv.append($("<canvas>").attr("width", "600").attr("height", "400"));
-        newCard.append(picDiv);
-        //add body of card
-        var simpDiv = $("<div>");
-        var cardBody = $("<div>").attr("class", "uk-card-body");
-        //add card title
-        var cardTitle = $("<h3>").attr("class", "uk-card-title").text(days[i] + ": " + response.hits[recipeNum].recipe.label);
-        var recipeSrc = $("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html("See the full recipe at: <a href=" + response.hits[recipeNum].recipe.url + ">" + response.hits[recipeNum].recipe.source + "</a>");
-        //set up the ul for the ingredient list
-        var ul = $("<ul>").attr("class", "uk-list uk-list-divider");
-        //add ingredients
-        for (var j = 0; j < response.hits[recipeNum].recipe.ingredientLines.length; j++){
-            ul.append($("<li>").text(response.hits[recipeNum].recipe.ingredientLines[j]));
-        }
-        
-        cardBody.append(cardTitle);
-        cardBody.append(recipeSrc);
-        cardBody.append(ul);
-        simpDiv.append(cardBody);
-        newCard.append(simpDiv);
-        
-        lastRecipes.push(response.hits[recipeNum].recipe.uri);
-        //create card footer
-        //var footDiv = $("<div>").attr("class", "uk-card-footer");
-        //create drop-down in body of daily menu div
-        //footDiv.append($("<button>").attr("class", "uk-button uk-button-text").attr("id", "activity").text("Hold For Activity Select"));
-       // newCard.append(footDiv);
-        
-
-        $("#weekdisplay").append(newCard);
+        makeCard(searchResults[i], days[i]);
+        lastRecipes.push(searchResults[i]);
     }
-    localStorage.setItem("lastRecipes", lastRecipes);
+    localStorage.setItem("lastRecipes", JSON.stringify(lastRecipes));
 };
 
+function createPrevMenu(){
+    createMenuFramework();
+    for (var i = 0; i < days.length; i++) {
+        makeCard(lastRecipes[i], days[i]);
 
-//values need to pull from Edmam response
-//recipe name: hits[0].recipe.label returns a string
-//image: hits[0].recipe.image returns a jpg link
-//ingredients: hits[0].recipe.ingredientLines returns an array of strings
+    }
+}
 
 
 // Initialize Firebase

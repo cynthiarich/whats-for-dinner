@@ -84,7 +84,7 @@ function retrieveData()
     console.log("healthOptions: " + healthOptionsUsed);
     localStorage.setItem("healthOptionsUsed", JSON.stringify(healthOptionsUsed));
     if (prefsChanged){
-        search();
+        searchEdamam();
     }
     
 } 
