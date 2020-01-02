@@ -1,6 +1,7 @@
 //https://api.edamam.com/search?q=chicken&app_id=3e6eb808&app_key=320b9c0c25d10bd3661f72afc26368db&to=2
 var apiIdEdamam = "3e6eb808"; // api id for edamam
 var apikeyEdamam = "320b9c0c25d10bd3661f72afc26368db"; // api key for edamam
+var recipeMax = 20;
 var recipes = []; // array for the recipie info
 
 // loops through the array information received from the user
@@ -17,7 +18,7 @@ function loopArray(str, data)
 }
 
 // search function calling edamam to get recipes
-function search()
+function searchEdamam()
 {
     for (var i = 0; i < interestedFoods.length; i++)
     {
@@ -38,22 +39,19 @@ function search()
             queryURL += loopArray("health", healthOptionsUsed);
         }
 
-        // gets the first 10 results from edamam
-        queryURL += "&to=10";
+        // gets the first 20 results from edamam
+        queryURL += "&to=" + recipeMax;
         console.log(queryURL);
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response)
         {
-            var hits = response.hits;
-            
-            for (var j = 0; j < hits.length; j++)
-            {
-                recipes.push(hits[j]);
+            for (var i = 0; i < response.hits.length; i++){
+                recipesAvail.push(i);
             }
-
-            console.log(recipes);
+            console.log(response);
+            createMenu(response);
         });
     }
 }
