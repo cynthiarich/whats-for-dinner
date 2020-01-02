@@ -44,7 +44,7 @@ function searchEdamam() {
             for (var i = 0; i < response.hits.length; i++) {
                 searchResults.push(response.hits[i].recipe);
             }
-            console.log(response);
+            console.log(searchResults);
             lastSearch = moment();
             localStorage.setItem("lastSearch", lastSearch);
             lastRecipes = [];

@@ -157,8 +157,8 @@ function createNewMenu(response) {
         recipesAvail.splice(arrPos, 1);
 
         //create card div
-        makeCard(searchResults[i], days[i]);
-        lastRecipes.push(searchResults[i]);
+        makeCard(searchResults[recipeNum], days[i]);
+        lastRecipes.push(searchResults[recipeNum]);
     }
     localStorage.setItem("lastRecipes", JSON.stringify(lastRecipes));
 };
