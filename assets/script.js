@@ -48,7 +48,7 @@ function initApp() {
         }
         else {
             lastRecipes = JSON.parse(localStorage.getItem("lastRecipes"));
-            lastActivities = JSON.parse(localeStorage.getItmes("lastActivities")) ;
+            lastActivities = JSON.parse(localStorage.getItem("lastActivities"));
             console.log("let's use our previous " + lastRecipes.length + " search results: " + lastRecipes);
             createPrevMenu();
         }
