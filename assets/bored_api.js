@@ -20,6 +20,7 @@ function searchActivity() {
         });
     }
     console.log(activitySearchResults);
+    localStorage.setItem("lastActivities", JSON.stringify(activitySearchResults));
 }
 
 
