@@ -23,6 +23,8 @@
             <ul class="uk-navbar-nav">
                 <!--Open preferences modal-->
                 <li><a href="#preference-modal" class="pref-btn" uk-toggle>Preferences</a></li>
+                <!--Open shopping list offcanvas-->
+                <li><a href="#shopping-list" class="shop-list-btn" uk-toggle>Shopping List</a></li>
                 <!--Open signin modal-->
                 <li><a href="#sign-in" uk-toggle>Sign In</a></li>
             </ul>
@@ -30,11 +32,10 @@
     </nav>
     <!--This is the jumbotron-->
     <div class="uk-background-cover uk-height-large uk-panel uk-flex uk-flex-left uk-flex-middle"
-        style="background-image: url(assets/images/hero-image.jpg);">
+        style="background-image: url(assets/images/hero-image.jpg); height: 600px">
         <div class="uk-margin-medium-left">
-            <h1 class="uk-heading-medium uk-text-light uk-light">Can't decide what's for dinner?<br />Allow us!</h1>
-            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions with our quick and
-                easy weekly menu generator.</p>
+            <h1 class="uk-heading-medium uk-text-light uk-light">What's for dinner?</h1>
+            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions.<br>Bring your family back to the table with good food and fun.<br>It's quick, easy, and free!</p>
             <!-- Button to toggle the preferences modal-->
             <button class="uk-button uk-button-default uk-margin-small-right uk-light pref-btn" type="button"
                 uk-toggle="target: #preference-modal">Get Started</button>
@@ -59,34 +60,68 @@
             </p>
         </div>
     </div>
-    
-    <div id="weekdisplay"> 
-        <!-- This is the display area for the days -->
-    </div>
 
+    <div id="weekdisplay">
+            <button class="uk-button uk-button-default uk-align-center uk-width-1-2 menu-update">Create my menu</button>
+            <!-- This is the display area for the days -->
+    </div>
+    
+    <!-- This is the modal to set preferences-->
     <div id="preference-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <h2 class="uk-modal-title">Select Your Dietary Preferences</h2>
-            <!-- edmam general ingredient search -->
-            <input class="uk-input" type="text" placeholder="How many people are eating? ">
-            <!-- edmam yield key-->
-            <div class="protein modal-list">
+
+            <div class="modal-list">
                 <h5 class="uk-heading-line uk-text-center"><span>What proteins do you eat?</span></h5>
-                <!--list proteins here-->
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls uk-column-1-3 protein">
+                        <!--list proteins here-->
+                    </div>
+                </div>
             </div>
-            <div class="diet-preference modal-list">
+
+            <div class="modal-list">
                 <h5 class="uk-heading-line uk-text-center"><span>Describe your diet:</span></h5>
-                <!--list diet preferences here-->
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls uk-column-1-3 diet-preference">
+                        <!--list diet preferences here-->
+                    </div>
+                </div>
             </div>
-            <div class="health-preference modal-list">
+
+            <div class=" modal-list">
                 <h5 class="uk-heading-line uk-text-center"><span>Select any dietary restrictions:</span></h5>
-                <!--list health preferences-->
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls uk-column-1-3 health-preference">
+                        <!--list health preferences-->
+                    </div>
+                </div>
             </div>
             <p class="uk-text-right">
                 <button class="uk-button uk-button-default uk-modal-close save-prefs" type="button">Save</button>
             </p>
         </div>
     </div>
+
+    <!-- This is the off-canvas element to hold the shopping list-->
+    <div id="shopping-list" uk-offcanvas>
+        <div class="uk-offcanvas-bar uk-background-primary">
+    
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+    
+            <h3>Your Shopping List</h3>
+    
+            <ul class="uk-list uk-list-divider" id="my-shopping-list">
+            </ul>
+
+            <button class="uk-button uk-button-default empty-list">Empty Shopping List</button>
+    
+        </div>
+    </div>
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -99,8 +134,10 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
 
-    <script src="assets/retrieval.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <script src="assets/search.js"></script>
+    <script src="assets/retrieval.js"></script>
     <script src="assets/bored_api.js"></script>
     <script src="assets/script.js"></script>
     <script src="./auth.js"></script>
