@@ -21,6 +21,8 @@ var recipesAvail = [];
 var lastRecipes = [];
 var searchResults = [];
 var shoppingList = [];
+var lastActivities = [];
+var activitySearchResults = [];
 
 function initApp() {
     //get previous responses from local storage
@@ -33,15 +35,20 @@ function initApp() {
     if (localStorage.getItem("healthOptionsUsed") !== null) {
         healthOptionsUsed = JSON.parse(localStorage.getItem("healthOptionsUsed"));
     }
+    if (localStorage.getItem("activitiesUsed") !== null) {
+        activitiesUsed = JSON.parse(localStorage.getItem("activitiesUsed"));
+    }
     if (localStorage.getItem("lastSearch") !== null) {
         console.log("last search was: " + localStorage.getItem("lastSearch"));
         lastSearch = localStorage.getItem("lastSearch");
         if (moment(lastSearch).isBefore(moment().subtract(7, 'days'))) {
             console.log("let's search again");
             searchEdamam();
+            searchActivity();
         }
         else {
             lastRecipes = JSON.parse(localStorage.getItem("lastRecipes"));
+            lastActivities = JSON.parse(localeStorage.getItmes("lastActivities")) ;
             console.log("let's use our previous " + lastRecipes.length + " search results: " + lastRecipes);
             createPrevMenu();
         }
@@ -55,6 +62,7 @@ $(document).on("click", ".pref-btn", function () {
     proteinDiv.empty();
     healthDiv.empty();
     dietDiv.empty();
+    activityDiv.empty();
 
     //display the preference options for the health key
     for (var i = 0; i < protein.length; i++) {
@@ -104,7 +112,35 @@ $(document).on("click", ".pref-btn", function () {
         label.append(dietOptions[i]);
         label.append($("<br>"));
     }
+
+    for (var i = 0; i < activities.length; i++) {
+        var label = $("<label>");
+        activityDiv.append(label);
+        var input = $("<input>");
+        input.addClass("uk-checkbox");
+        input.addClass("uk-checkbox modal-checkbox");
+        input.attr("type", "checkbox");
+        input.attr("data-activity", activities[i]);
+        if (activitiesUsed.indexOf(activities[i]) !== -1) { //need to add activitiesUsed
+            input.attr("checked", "");
+        }
+        label.append(input);
+        label.append(activities[i]);
+        label.append($("<br>"));
+    }
 });
+// var li2 = ($("<li>").text("test")); //cant do it here cause it keeps appending to this one
+// function createActivityList() { //only appends on first div card regardless, need to add class to button maybe and append uniquely
+//     // var li2 = ($("<li>")); 
+//     console.log("start");
+//     for (i = 0; i < activities.length; i++) {
+//         var atag = $("<a>").attr("href", "#").attr("id", "choiceDrop").text(activities[i]); //replace href later with a class to register click event?
+//         li2.append(atag);
+//     }
+//     console.log("end");
+
+// }
+
 
 function createMenuFramework() {
     //clear previous display
@@ -114,7 +150,7 @@ function createMenuFramework() {
 
 }
 
-function makeCard(data, day) {
+function makeCard(data, activity, day) {
     var newCard = $("<div>").attr("class", "uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin").attr("uk-grid", "").attr("uk-scrollspy", "cls: uk-animation-slide-right; repeat: true");
     
     //add image of recipe
@@ -142,6 +178,23 @@ function makeCard(data, day) {
         ul.append(li);
         li.append($("<button>").attr("data-ingred", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-left shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
     }
+       
+        //creates button
+        // var activeSelect = $("<button>").attr("id", "activity").attr("class", "uk-button uk-button-primary").text("Choose Activity");
+        // var selections = $("<div>").attr("uk-dropdown", "");
+        // //iterates through activities array to create dropdown
+        // var ul2 = ($("<ul>").attr("class", "uk-nav uk-dropdown-nav"));
+        // // ul2.append(createActivityList());
+        // var li2 = ($("<li>"));
+
+        // li2.append(atag)
+        // ul2.append(li2);
+        // selections.append(ul2);
+
+        // //appends the button within the div
+        // cardBody.append(activeSelect).append(selections); //could append to cardBody OR newCard
+        //needs to store the value from click to pass to API
+        //pulls from bored api to return an activity from the dropdown selection
 
     cardBody.append(cardTitle);
     cardBody.append(recipeSrc);
@@ -168,7 +221,7 @@ function createNewMenu(response) {
         recipesAvail.splice(arrPos, 1);
 
         //create card div
-        makeCard(searchResults[recipeNum], days[i]);
+        makeCard(searchResults[recipeNum], activitySearchResults[i], days[i]);
         lastRecipes.push(searchResults[recipeNum]);
     }
     localStorage.setItem("lastRecipes", JSON.stringify(lastRecipes));
@@ -177,8 +230,7 @@ function createNewMenu(response) {
 function createPrevMenu(){
     createMenuFramework();
     for (var i = 0; i < days.length; i++) {
-        makeCard(lastRecipes[i], days[i]);
-
+        makeCard(lastRecipes[i], lastActivities[i], days[i]);
     }
 }
 
