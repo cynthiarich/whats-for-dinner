@@ -2,7 +2,6 @@
 var apiIdEdamam = "3e6eb808"; // api id for edamam
 var apikeyEdamam = "320b9c0c25d10bd3661f72afc26368db"; // api key for edamam
 var recipeMax = 20;
-var recipes = []; // array for the recipie info
 
 // loops through the array information received from the user
 function loopArray(str, data) {
