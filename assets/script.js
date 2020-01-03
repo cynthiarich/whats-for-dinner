@@ -48,7 +48,7 @@ function initApp() {
         }
         else {
             lastRecipes = JSON.parse(localStorage.getItem("lastRecipes"));
-            lastActivities = JSON.parse(localeStorage.getItmes("lastActivities")) ;
+            lastActivities = JSON.parse(localStorage.getItem("lastActivities"));
             console.log("let's use our previous " + lastRecipes.length + " search results: " + lastRecipes);
             createPrevMenu();
         }
@@ -129,17 +129,6 @@ $(document).on("click", ".pref-btn", function () {
         label.append($("<br>"));
     }
 });
-// var li2 = ($("<li>").text("test")); //cant do it here cause it keeps appending to this one
-// function createActivityList() { //only appends on first div card regardless, need to add class to button maybe and append uniquely
-//     // var li2 = ($("<li>")); 
-//     console.log("start");
-//     for (i = 0; i < activities.length; i++) {
-//         var atag = $("<a>").attr("href", "#").attr("id", "choiceDrop").text(activities[i]); //replace href later with a class to register click event?
-//         li2.append(atag);
-//     }
-//     console.log("end");
-
-// }
 
 
 function createMenuFramework() {
@@ -151,58 +140,43 @@ function createMenuFramework() {
 }
 
 function makeCard(data, activity, day) {
-    var newCard = $("<div>").attr("class", "uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin").attr("uk-grid", "").attr("uk-scrollspy", "cls: uk-animation-slide-right; repeat: true");
-    
-    //add image of recipe
-    var picDiv = $("<div>").attr("class", "uk-card-media-left uk-cover-container");
-    picDiv.append($("<img>").attr("src", data.image).attr("alt", data.label).attr("uk-cover", ""));
-    picDiv.append($("<canvas>").attr("width", "600").attr("height", "400"));
-    newCard.append(picDiv);
-    
-    //add body of card
-    var simpDiv = $("<div>");
-    var cardBody = $("<div>").attr("class", "uk-card-body");
-    
-    //add card title
-    var cardTitle = $("<h3>").attr("class", "uk-card-title").text(day + ": " + data.label);
-    var recipeSrc = $("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html("See the full recipe at: <a href=" + data.url + ">" + data.source + "</a>");
-    //add buttons for favorites and swaps
-    var favBtn = $("<button>").attr("class", "uk-icon-button uk-margin-small-right favorite-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Save to favorites; pos: top").attr("uk-icon", "heart");
-    var swapBtn = $("<button>").attr("class", "uk-icon-button swap-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Swap this recipe; pos: top").attr("uk-icon", "refresh");
 
+    var newCard = $("<div>").attr("class", "uk-card uk-card-default uk-width-1-1@m uk-margin-medium").attr("uk-scrollspy", "cls: uk-animation-slide-right");
+
+    //make the card header
+    var cardHead = $("<div>").attr("class", "uk-card-header card-topper uk-light");
+    var headGrid = $("<div>").attr("class", "uk-grid-small uk-flex-middle").attr("uk-grid", "");
+    var imgCont = $("<div>").attr("class", "uk-width-auto");
+    imgCont.append($("<img>").attr("class", "uk-border-circle").attr("width", "100").attr("height", "100").attr("src", data.image).attr("alt", data.label));
+    var headerTextDiv = $("<div>").attr("class", "uk-width-expand");
+    var headerTitle = $("<h3>").attr("class", "uk-card-title uk-margin-remove-bottom").text(day + ": " + data.label);
+    headerTitle.append($("<button>").attr("class", "uk-icon-button uk-margin-small-left favorite-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Save to favorites; pos: top").attr("uk-icon", "heart"));
+    headerTitle.append($("<button>").attr("class", "uk-icon-button uk-margin-small-left swap-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Swap this recipe; pos: top").attr("uk-icon", "refresh"));
+    headerTextDiv.append(headerTitle);
+    headerTextDiv.append($("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html("See the full recipe at: <a href=" + data.url + ">" + data.source + "</a>"));
+    headGrid.append(imgCont);
+    headGrid.append(headerTextDiv);
+    cardHead.append(headGrid);
+    newCard.append(cardHead);
+
+    //add body of card
+    var cardBody = $("<div>").attr("class", "uk-card-body");
     //set up the ul for the ingredient list
     var ul = $("<ul>").attr("class", "uk-list uk-list-divider");
     //add ingredients
     for (var j = 0; j < data.ingredientLines.length; j++) {
         var li = $("<li>").text(data.ingredientLines[j]);
         ul.append(li);
-        li.append($("<button>").attr("data-ingred", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-left shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
+        li.prepend($("<button>").attr("data-ingred", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-left shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
     }
-       
-        //creates button
-        // var activeSelect = $("<button>").attr("id", "activity").attr("class", "uk-button uk-button-primary").text("Choose Activity");
-        // var selections = $("<div>").attr("uk-dropdown", "");
-        // //iterates through activities array to create dropdown
-        // var ul2 = ($("<ul>").attr("class", "uk-nav uk-dropdown-nav"));
-        // // ul2.append(createActivityList());
-        // var li2 = ($("<li>"));
-
-        // li2.append(atag)
-        // ul2.append(li2);
-        // selections.append(ul2);
-
-        // //appends the button within the div
-        // cardBody.append(activeSelect).append(selections); //could append to cardBody OR newCard
-        //needs to store the value from click to pass to API
-        //pulls from bored api to return an activity from the dropdown selection
-
-    cardBody.append(cardTitle);
-    cardBody.append(recipeSrc);
-    cardBody.append(favBtn);
-    cardBody.append(swapBtn);
     cardBody.append(ul);
-    simpDiv.append(cardBody);
-    newCard.append(simpDiv);
+    newCard.append(cardBody);
+
+    //add footer of card
+    var cardFooter = $("<div>").attr("class", "uk-card-footer card-footer");
+    cardFooter.append($("<p>").text("Dinner Activity: " + activity));
+
+    newCard.append(cardFooter);
     $("#weekdisplay").append(newCard);
 }
 
@@ -214,7 +188,7 @@ function createNewMenu(response) {
     }
     //loop through the response JSON and add the recipes
     for (var i = 0; i < days.length; i++) {
-        
+
         //get random recipe from available options
         var arrPos = Math.floor(Math.random() * recipesAvail.length);
         var recipeNum = recipesAvail[arrPos];
@@ -268,7 +242,7 @@ $(document).on("click", ".shop-list-btn", function() {
     else {
         $("#my-shopping-list").append($("<li>").text("Your shopping list is currently empty. Select items from the weekly menu to add to your shopping list."));
     }
-      
+
 });
 
 // Initialize Firebase
