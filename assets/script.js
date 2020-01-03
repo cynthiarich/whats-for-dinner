@@ -117,7 +117,7 @@ function createMenuFramework() {
 function makeCard(data, activity, day) {
 
     var newCard = $("<div>").attr("class", "uk-card uk-card-default uk-width-1-1@m uk-margin-medium").attr("uk-scrollspy", "cls: uk-animation-slide-right");
-    
+
     //make the card header
     var cardHead = $("<div>").attr("class", "uk-card-header card-topper uk-light");
     var headGrid = $("<div>").attr("class", "uk-grid-small uk-flex-middle").attr("uk-grid", "");
@@ -142,11 +142,11 @@ function makeCard(data, activity, day) {
     for (var j = 0; j < data.ingredientLines.length; j++) {
         var li = $("<li>").text(data.ingredientLines[j]);
         ul.append(li);
-        li.prepend($("<button>").attr("ingred-data", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-right shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
+        li.prepend($("<button>").attr("data-ingred", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-left shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
     }
     cardBody.append(ul);
     newCard.append(cardBody);
-    
+
     //add footer of card
     var cardFooter = $("<div>").attr("class", "uk-card-footer card-footer");
     cardFooter.append($("<p>").text("Dinner Activity: " + activity));
@@ -163,7 +163,7 @@ function createNewMenu(response) {
     }
     //loop through the response JSON and add the recipes
     for (var i = 0; i < days.length; i++) {
-        
+
         //get random recipe from available options
         var arrPos = Math.floor(Math.random() * recipesAvail.length);
         var recipeNum = recipesAvail[arrPos];
@@ -193,8 +193,8 @@ function swapRecipe() {
 }
 
 function createList(){
-    console.log("Add this ingredient to the shopping list: ", $(this).attr("ingred-data"));
-    shoppingList.push($(this).attr("ingred-data"));
+    console.log("Add this ingredient to the shopping list: ", $(this).attr("data-ingred"));
+    shoppingList.push($(this).attr("data-ingred"));
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 }
 
@@ -213,12 +213,12 @@ $(document).on("click", ".shop-list-btn", function() {
     if (shoppingList.length >= 1){
         for (var i = 0; i < shoppingList.length; i++){
             $("#my-shopping-list").append($("<li>").text(shoppingList[i]));
-        };
+        }
     }
     else {
         $("#my-shopping-list").append($("<li>").text("Your shopping list is currently empty. Select items from the weekly menu to add to your shopping list."));
     }
-      
+
 });
 
 // Initialize Firebase
