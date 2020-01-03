@@ -20,7 +20,8 @@ function searchEdamam() {
     searchResults = [];
     for (var i = 0; i < interestedFoods.length; i++) {
         var queryURL = "https://api.edamam.com/search?q=";
-
+        var fromRand = Math.floor(Math.random() * 10);
+        var toRand = fromRand + recipeMax
         queryURL += interestedFoods[i];
         queryURL += "&app_id=" + apiIdEdamam + "&app_key=" + apikeyEdamam;
 
@@ -35,7 +36,8 @@ function searchEdamam() {
         }
 
         // gets the first x results from edamam
-        queryURL += "&to=" + recipeMax;
+        queryURL += "&from=" + fromRand;
+        queryURL += "&to=" + toRand;
         console.log(queryURL);
         $.ajax({
             url: queryURL,

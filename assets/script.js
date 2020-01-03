@@ -140,7 +140,7 @@ function makeCard(data, day) {
     for (var j = 0; j < data.ingredientLines.length; j++) {
         var li = $("<li>").text(data.ingredientLines[j]);
         ul.append(li);
-        li.append($("<button>").attr("ingred-data", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-left shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
+        li.append($("<button>").attr("data-ingred", data.ingredientLines[j]).attr("class", "uk-icon-button uk-margin-small-left shopping-btn").attr("uk-tooltip", "title: Add to shopping list; pos: top").attr("uk-icon", "cart"));
     }
 
     cardBody.append(cardTitle);
@@ -191,8 +191,8 @@ function swapRecipe() {
 }
 
 function createList(){
-    console.log("Add this ingredient to the shopping list: ", $(this).attr("ingred-data"));
-    shoppingList.push($(this).attr("ingred-data"));
+    console.log("Add this ingredient to the shopping list: ", $(this).attr("data-ingred"));
+    shoppingList.push($(this).attr("data-ingred"));
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 }
 
@@ -211,7 +211,7 @@ $(document).on("click", ".shop-list-btn", function() {
     if (shoppingList.length >= 1){
         for (var i = 0; i < shoppingList.length; i++){
             $("#my-shopping-list").append($("<li>").text(shoppingList[i]));
-        };
+        }
     }
     else {
         $("#my-shopping-list").append($("<li>").text("Your shopping list is currently empty. Select items from the weekly menu to add to your shopping list."));
@@ -236,6 +236,6 @@ $(".favorite-btn").on("click", saveFavorites);
 
 $(".swap-btn").on("click", swapRecipe);
 
-$(".shopping-btn").on("click", createList);
+$(document).on("click", ".shopping-btn", createList);
 
 $(".empty-list").on("click", emptyList);
