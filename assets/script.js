@@ -256,7 +256,10 @@ $("#open").on("click", function () {
 
 $(".save-prefs").on("click", retrieveData);
 
-$(".menu-update").on("click", searchEdamam);
+$(".menu-update").on("click", function () {
+    searchEdamam();
+    searchActivity();
+});
 
 $(".favorite-btn").on("click", saveFavorites);
 

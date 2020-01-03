@@ -17,10 +17,11 @@ function searchActivity() {
         }).then(function (response) {
             console.log("activity: ", response.activity);
             activitySearchResults.push(response.activity);
+            localStorage.setItem("lastActivities", JSON.stringify(activitySearchResults));
+            console.log("=====show search result array======")
+            console.log(activitySearchResults);
         });
     }
-    console.log(activitySearchResults);
-    localStorage.setItem("lastActivities", JSON.stringify(activitySearchResults));
 }
 
 
