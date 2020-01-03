@@ -21,6 +21,8 @@ var recipesAvail = [];
 var lastRecipes = [];
 var searchResults = [];
 var shoppingList = [];
+var lastActivities = [];
+var activitySearchResults = [];
 
 function initApp() {
     //get previous responses from local storage
@@ -33,15 +35,20 @@ function initApp() {
     if (localStorage.getItem("healthOptionsUsed") !== null) {
         healthOptionsUsed = JSON.parse(localStorage.getItem("healthOptionsUsed"));
     }
+    if (localStorage.getItem("activitiesUsed") !== null) {
+        activitiesUsed = JSON.parse(localStorage.getItem("activitiesUsed"));
+    }
     if (localStorage.getItem("lastSearch") !== null) {
         console.log("last search was: " + localStorage.getItem("lastSearch"));
         lastSearch = localStorage.getItem("lastSearch");
         if (moment(lastSearch).isBefore(moment().subtract(7, 'days'))) {
             console.log("let's search again");
             searchEdamam();
+            searchActivity();
         }
         else {
             lastRecipes = JSON.parse(localStorage.getItem("lastRecipes"));
+            lastActivities = JSON.parse(localeStorage.getItmes("lastActivities")) ;
             console.log("let's use our previous " + lastRecipes.length + " search results: " + lastRecipes);
             createPrevMenu();
         }
@@ -55,6 +62,7 @@ $(document).on("click", ".pref-btn", function () {
     proteinDiv.empty();
     healthDiv.empty();
     dietDiv.empty();
+    activityDiv.empty();
 
     //display the preference options for the health key
     for (var i = 0; i < protein.length; i++) {
@@ -104,7 +112,24 @@ $(document).on("click", ".pref-btn", function () {
         label.append(dietOptions[i]);
         label.append($("<br>"));
     }
+
+    for (var i = 0; i < activities.length; i++) {
+        var label = $("<label>");
+        activityDiv.append(label);
+        var input = $("<input>");
+        input.addClass("uk-checkbox");
+        input.addClass("uk-checkbox modal-checkbox");
+        input.attr("type", "checkbox");
+        input.attr("data-activity", activities[i]);
+        if (activitiesUsed.indexOf(activities[i]) !== -1) { //need to add activitiesUsed
+            input.attr("checked", "");
+        }
+        label.append(input);
+        label.append(activities[i]);
+        label.append($("<br>"));
+    }
 });
+
 
 function createMenuFramework() {
     //clear previous display
@@ -170,7 +195,7 @@ function createNewMenu(response) {
         recipesAvail.splice(arrPos, 1);
 
         //create card div
-        makeCard(searchResults[recipeNum], "Shuffleboard", days[i]);
+        makeCard(searchResults[recipeNum], activitySearchResults[i], days[i]);
         lastRecipes.push(searchResults[recipeNum]);
     }
     localStorage.setItem("lastRecipes", JSON.stringify(lastRecipes));
@@ -179,8 +204,7 @@ function createNewMenu(response) {
 function createPrevMenu(){
     createMenuFramework();
     for (var i = 0; i < days.length; i++) {
-        makeCard(lastRecipes[i], "Shuffleboard", days[i]);
-
+        makeCard(lastRecipes[i], lastActivities[i], days[i]);
     }
 }
 
