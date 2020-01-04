@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://developer.edamam.com/attribution/badge.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <link type="text/css" rel="stylesheet" href="assets/style.css" />
@@ -14,7 +15,7 @@
 
 <body>
     <!--Top navigation for page-->
-    <nav class="uk-navbar-container" uk-navbar>
+    <nav class="uk-navbar-container" uk-sticky uk-navbar>
         <!--Add a logo to the left of the page-->
         <a href="#" class="uk-navbar-item uk-logo"><img height="40" width="40" src="assets/images/wfd-logo.png" />
             &nbsp;What's For Dinner</a>
@@ -35,7 +36,8 @@
         style="background-image: url(assets/images/hero-image.jpg); height: 600px">
         <div class="uk-margin-medium-left">
             <h1 class="uk-heading-medium uk-text-light uk-light">What's for dinner?</h1>
-            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions.<br>Bring your family back to the table with good food and fun.<br>It's quick, easy, and free!</p>
+            <p class="uk-text-lead uk-text-light uk-light">Take the pain out of dinnertime decisions.<br>Bring your
+                family back to the table with good food and fun.<br>It's quick, easy, and free!</p>
             <!-- Button to toggle the preferences modal-->
             <button class="uk-button uk-button-default uk-margin-small-right uk-light pref-btn" type="button"
                 uk-toggle="target: #preference-modal">Get Started</button>
@@ -62,10 +64,10 @@
     </div>
 
     <div id="weekdisplay">
-            <button class="uk-button uk-button-default uk-align-center uk-width-1-2 menu-update">Create my menu</button>
-            <!-- This is the display area for the days -->
+        <button class="uk-button uk-button-default uk-align-center uk-width-1-2 menu-update">Create my menu</button>
+        <!-- This is the display area for the days -->
     </div>
-    
+
     <!-- This is the modal to set preferences-->
     <div id="preference-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
@@ -119,18 +121,24 @@
     <!-- This is the off-canvas element to hold the shopping list-->
     <div id="shopping-list" uk-offcanvas>
         <div class="uk-offcanvas-bar uk-background-primary">
-    
+
             <button class="uk-offcanvas-close" type="button" uk-close></button>
-    
+
             <h3>Your Shopping List</h3>
-    
+
             <ul class="uk-list uk-list-divider" id="my-shopping-list">
             </ul>
 
             <button class="uk-button uk-button-default empty-list">Empty Shopping List</button>
-    
+
         </div>
     </div>
+
+    <footer class="uk-navbar-container" uk-sticky uk-navbar>
+        <div class="uk-navbar-right">
+            <div id="edamam-badge"></div>
+        </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
