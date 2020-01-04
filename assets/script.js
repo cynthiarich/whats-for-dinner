@@ -277,9 +277,9 @@ $(document).on("click", ".menu-update", function () {
 
 $(document).on("click", ".pref-btn", getPrefs);
 
-$(".favorite-btn").on("click", saveFavorites);
+$(document).on("click", ".favorite-btn", saveFavorites);
 
-$(".swap-btn").on("click", swapRecipe);
+$(document).on("click", ".swap-btn", swapRecipe);
 
 $(document).on("click", ".shopping-btn", createList);
 
