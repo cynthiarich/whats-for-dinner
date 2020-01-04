@@ -16,13 +16,14 @@ var dietOptions = ["balanced", "high-protein", "low-fat", "low-carb"];
 var healthOptions = ["vegan", "vegetarian", "sugar-conscious", "peanut-free", "tree-nut-free", "alcohol-free"];
 var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 var activities = ["Education", "Recreational", "Social", "DIY", "Charity", "Cooking", "Relaxation", "Music", "Busywork"];
-var lastSearch;
-var recipesAvail = [];
-var lastRecipes = [];
-var searchResults = [];
-var shoppingList = [];
-var lastActivities = [];
-var activitySearchResults = [];
+var lastSearch; //saves the date the last search was run and displays previous search results if less than 7 days ago
+var recipesAvail = []; //an array with numbers used to ensure recipes are not duplicated in the randomization process
+var lastRecipes = []; //an array containing the recipes retrieved from local storage
+var searchResults = []; //an array containing newest recipe search results
+var shoppingList = []; //an array containing the shopping list
+var lastActivities = []; //an array containing the activities retrieved from local storage
+var activitySearchResults = []; //an array containing the newest activity search results
+var menuFavorites = []; //an array containing menu items previously marked as favorites
 
 function initApp() {
     //get previous responses from local storage
@@ -38,24 +39,24 @@ function initApp() {
     if (localStorage.getItem("activitiesUsed") !== null) {
         activitiesUsed = JSON.parse(localStorage.getItem("activitiesUsed"));
     }
+    if (localStorage.getItem("shoppingList") !== null) {
+        shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+    }
+    if (localStorage.getItem("menuFavorites") !== null) {
+        menuFavorites = JSON.parse(localStorage.getItem("menuFavorites"));
+    }
     if (localStorage.getItem("lastSearch") !== null) {
-        console.log("last search was: " + localStorage.getItem("lastSearch"));
         lastSearch = localStorage.getItem("lastSearch");
         if (moment(lastSearch).isBefore(moment().subtract(7, 'days'))) {
-            console.log("let's search again");
             searchEdamam();
             searchActivity();
         }
         else {
             lastRecipes = JSON.parse(localStorage.getItem("lastRecipes"));
             lastActivities = JSON.parse(localStorage.getItem("lastActivities"));
-            console.log("let's use our previous " + lastRecipes.length + " search results: " + lastRecipes);
             createPrevMenu();
         }
-    }
-    if (localStorage.getItem("shoppingList") !== null) {
-        shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-    }
+    }  
 }
 
 $(document).on("click", ".pref-btn", function () {
@@ -150,7 +151,13 @@ function makeCard(data, activity, day) {
     imgCont.append($("<img>").attr("class", "uk-border-circle").attr("width", "100").attr("height", "100").attr("src", data.image).attr("alt", data.label));
     var headerTextDiv = $("<div>").attr("class", "uk-width-expand");
     var headerTitle = $("<h3>").attr("class", "uk-card-title uk-margin-remove-bottom").text(day + ": " + data.label);
-    headerTitle.append($("<button>").attr("class", "uk-icon-button uk-margin-small-left favorite-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Save to favorites; pos: top").attr("uk-icon", "heart"));
+    if (menuFavorites.indexOf(data.uri) === -1){
+        headerTitle.append($("<button>").attr("class", "uk-icon-button uk-margin-small-left favorite-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Save to favorites; pos: top").attr("uk-icon", "heart"));
+    }
+    else {
+        headerTitle.append($("<button>").attr("class", "uk-icon-button uk-text-danger uk-margin-small-left favorite-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Remove from favorites; pos: top").attr("uk-icon", "heart"));
+    }
+    
     headerTitle.append($("<button>").attr("class", "uk-icon-button uk-margin-small-left swap-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Swap this recipe; pos: top").attr("uk-icon", "refresh"));
     headerTextDiv.append(headerTitle);
     headerTextDiv.append($("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html("See the full recipe at: <a href=" + data.url + ">" + data.source + "</a>"));
@@ -209,7 +216,17 @@ function createPrevMenu(){
 }
 
 function saveFavorites(){
-    console.log("Save this to favorites: ", $(this).attr("recipe-data"));
+    if (menuFavorites.indexOf($(this).attr("recipe-data")) === -1){
+        menuFavorites.push($(this).attr("recipe-data"));
+        localStorage.setItem("menuFavorites", JSON.stringify(menuFavorites));
+        $(this).attr("class", "uk-icon-button uk-text-danger uk-margin-small-left favorite-btn").attr("uk-tooltip", "title: Remove from favorites; pos: top");
+    }
+    else {
+        menuFavorites.splice(menuFavorites.indexOf($(this).attr("recipe-data")), 1);
+        localStorage.setItem("menuFavorites", JSON.stringify(menuFavorites));
+        $(this).attr("class", "uk-icon-button uk-margin-small-left favorite-btn").attr("uk-tooltip", "title: Save to favorites; pos: top");
+    }
+
 }
 
 function swapRecipe() {
@@ -217,7 +234,6 @@ function swapRecipe() {
 }
 
 function createList(){
-    console.log("Add this ingredient to the shopping list: ", $(this).attr("data-ingred"));
     shoppingList.push($(this).attr("data-ingred"));
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 }
@@ -232,7 +248,6 @@ function emptyList(){
 $(document).on("click", ".shop-list-btn", function() {
     //empty the shopping list div
     $("#my-shopping-list").empty();
-    console.log(shoppingList);
     //loop through to create li's
     if (shoppingList.length >= 1){
         for (var i = 0; i < shoppingList.length; i++){
