@@ -1,7 +1,7 @@
 var interestedFoods = [];
 var dietOptionsUsed = [];
 var healthOptionsUsed = [];
-var activitiesUsed = [];
+var activitiesUsed = ["Education", "Recreational", "Social", "DIY", "Charity", "Cooking", "Relaxation", "Music", "Busywork"];
 var proteinDiv = $(".protein");
 var dietDiv = $(".diet-preference");
 var healthDiv = $(".health-preference");
@@ -104,12 +104,12 @@ function retrieveData() {
     console.log("activityOptions:" + activitiesUsed);
     localStorage.setItem("activitiesUsed", JSON.stringify(activitiesUsed));
 
-    if (prefsChanged) {
-        searchEdamam();
+    if (activityChanged || lastActivities.length == 0) {
+        searchActivity(prefsChanged); 
     }
 
-    if (activityChanged) {
-        searchActivity(); //have it run the activity API again?
-    }
+    if (prefsChanged) {
+        searchEdamam();
+    } 
 
 } 
