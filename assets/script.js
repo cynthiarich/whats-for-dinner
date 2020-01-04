@@ -59,7 +59,7 @@ function initApp() {
     }  
 }
 
-$(document).on("click", ".pref-btn", function () {
+function getPrefs () {
     proteinDiv.empty();
     healthDiv.empty();
     dietDiv.empty();
@@ -129,7 +129,7 @@ $(document).on("click", ".pref-btn", function () {
         label.append(activities[i]);
         label.append($("<br>"));
     }
-});
+};
 
 
 function createMenuFramework() {
@@ -271,10 +271,12 @@ $("#open").on("click", function () {
 
 $(".save-prefs").on("click", retrieveData);
 
-$(".menu-update").on("click", function () {
-    searchEdamam();
-    searchActivity();
+$(document).on("click", ".menu-update", function () {
+        searchEdamam();
+        searchActivity();
 });
+
+$(document).on("click", ".pref-btn", getPrefs);
 
 $(".favorite-btn").on("click", saveFavorites);
 
