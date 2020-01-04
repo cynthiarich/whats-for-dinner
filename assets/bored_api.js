@@ -8,7 +8,7 @@ function searchActivity() {
     for (var i = 0; i < 7; i++) {
 
         var h = Math.floor(Math.random() * activitiesUsed.length); //gives us a random number within array
-        var queryURL = "http://www.boredapi.com/api/activity?type=" + activitiesUsed[h].toLowerCase();
+        var queryURL = "https://www.boredapi.com/api/activity?type=" + activitiesUsed[h].toLowerCase();
 
         // Runs AJAX call
         $.ajax({
