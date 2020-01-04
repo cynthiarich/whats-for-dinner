@@ -21,8 +21,7 @@ var recipesAvail = []; //an array with numbers used to ensure recipes are not du
 var lastRecipes = []; //an array containing the recipes retrieved from local storage
 var searchResults = []; //an array containing newest recipe search results
 var shoppingList = []; //an array containing the shopping list
-var lastActivities = []; //an array containing the activities retrieved from local storage
-var activitySearchResults = []; //an array containing the newest activity search results
+var lastActivities = []; //an array containing the activities retrieved on last search - either directly from search or from local storage
 var menuFavorites = []; //an array containing menu items previously marked as favorites
 
 function initApp() {
@@ -48,7 +47,7 @@ function initApp() {
     if (localStorage.getItem("lastSearch") !== null) {
         lastSearch = localStorage.getItem("lastSearch");
         if (moment(lastSearch).isBefore(moment().subtract(7, 'days'))) {
-            searchActivity();
+            searchActivity(true);
             searchEdamam();  
         }
         else {
@@ -122,7 +121,7 @@ function getPrefs () {
         input.addClass("uk-checkbox modal-checkbox");
         input.attr("type", "checkbox");
         input.attr("data-activity", activities[i]);
-        if (activitiesUsed.indexOf(activities[i]) !== -1) { //need to add activitiesUsed
+        if (activitiesUsed.indexOf(activities[i]) !== -1) { 
             input.attr("checked", "");
         }
         label.append(input);
@@ -202,7 +201,7 @@ function createNewMenu(response) {
         recipesAvail.splice(arrPos, 1);
 
         //create card div
-        makeCard(searchResults[recipeNum], activitySearchResults[i], days[i]);
+        makeCard(searchResults[recipeNum], lastActivities[i], days[i]);
         lastRecipes.push(searchResults[recipeNum]);
     }
     localStorage.setItem("lastRecipes", JSON.stringify(lastRecipes));
@@ -272,7 +271,7 @@ $("#open").on("click", function () {
 $(".save-prefs").on("click", retrieveData);
 
 $(document).on("click", ".menu-update", function () {
-        searchActivity();
+        searchActivity(true);
         searchEdamam();
 });
 

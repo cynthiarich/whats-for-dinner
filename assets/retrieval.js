@@ -104,9 +104,12 @@ function retrieveData() {
     console.log("activityOptions:" + activitiesUsed);
     localStorage.setItem("activitiesUsed", JSON.stringify(activitiesUsed));
 
-    if (prefsChanged) {
-        searchActivity();
-        searchEdamam();
+    if (activityChanged || lastActivities.length == 0) {
+        searchActivity(prefsChanged); 
     }
+
+    if (prefsChanged) {
+        searchEdamam();
+    } 
 
 } 

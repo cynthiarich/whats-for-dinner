@@ -1,15 +1,15 @@
 
 //bored API - need to pass in number of participants (from preferences), pull from the dropdown the activity type
 
-function searchActivity() {
-    activitySearchResults = [];
+function searchActivity(menu) {
+    lastActivities = [];
     if (activitiesUsed.length == 0) {
         console.log("create an array telling them to pick some activities")
         for (var p = 0; p < 7; p++) {
             //if they didn't pick any activities then show activities from all categories
-            activitySearchResults.push("Pick at least one activity in your preferences for random dinnertime fun!");
+            lastActivities.push("Pick at least one activity in your preferences for random dinnertime fun!");
             console.log("=====show search result array======")
-            console.log(activitySearchResults);
+            console.log(lastActivities);
         }
     }
     else {
@@ -25,10 +25,13 @@ function searchActivity() {
                 method: "GET"
             }).then(function (response) {
                 console.log("activity: ", response.activity);
-                activitySearchResults.push(response.activity);
-                localStorage.setItem("lastActivities", JSON.stringify(activitySearchResults));
+                lastActivities.push(response.activity);
+                localStorage.setItem("lastActivities", JSON.stringify(lastActivities));
                 console.log("=====show search result array======")
-                console.log(activitySearchResults);
+                console.log(lastActivities);
+                if (lastActivities.length === 7 && menu === false){
+                    createPrevMenu();
+                }
             });
         }
     }
