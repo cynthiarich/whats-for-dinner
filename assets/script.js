@@ -48,8 +48,8 @@ function initApp() {
     if (localStorage.getItem("lastSearch") !== null) {
         lastSearch = localStorage.getItem("lastSearch");
         if (moment(lastSearch).isBefore(moment().subtract(7, 'days'))) {
-            searchEdamam();
             searchActivity();
+            searchEdamam();  
         }
         else {
             lastRecipes = JSON.parse(localStorage.getItem("lastRecipes"));
@@ -272,8 +272,8 @@ $("#open").on("click", function () {
 $(".save-prefs").on("click", retrieveData);
 
 $(document).on("click", ".menu-update", function () {
-        searchEdamam();
         searchActivity();
+        searchEdamam();
 });
 
 $(document).on("click", ".pref-btn", getPrefs);

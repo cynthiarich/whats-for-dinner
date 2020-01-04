@@ -105,11 +105,8 @@ function retrieveData() {
     localStorage.setItem("activitiesUsed", JSON.stringify(activitiesUsed));
 
     if (prefsChanged) {
+        searchActivity();
         searchEdamam();
-    }
-
-    if (activityChanged) {
-        searchActivity(); //have it run the activity API again?
     }
 
 } 

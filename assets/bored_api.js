@@ -3,6 +3,13 @@
 
 function searchActivity() {
     activitySearchResults = [];
+    if (activitiesUsed.length == 0){
+        console.log("giving them all the activities")
+        for (var p = 0; p < activities.length; p++){
+            //if they didn't pick any activities then show activities from all categories
+            activitiesUsed.push(activities[p]);
+        }
+    }
 
     //update this to push to the activity array for 7 days of activities
     for (var i = 0; i < 7; i++) {
