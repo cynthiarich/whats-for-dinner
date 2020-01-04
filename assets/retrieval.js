@@ -1,7 +1,7 @@
 var interestedFoods = [];
 var dietOptionsUsed = [];
 var healthOptionsUsed = [];
-var activitiesUsed = [];
+var activitiesUsed = ["Education", "Recreational", "Social", "DIY", "Charity", "Cooking", "Relaxation", "Music", "Busywork"];
 var proteinDiv = $(".protein");
 var dietDiv = $(".diet-preference");
 var healthDiv = $(".health-preference");
