@@ -160,7 +160,7 @@ function makeCard(data, activity, day) {
     
     headerTitle.append($("<button>").attr("class", "uk-icon-button uk-margin-small-left swap-btn").attr("recipe-data", data.uri).attr("uk-tooltip", "title: Swap this recipe; pos: top").attr("uk-icon", "refresh"));
     headerTextDiv.append(headerTitle);
-    headerTextDiv.append($("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html("See the full recipe at: <a href=" + data.url + ">" + data.source + "</a>"));
+    headerTextDiv.append($("<p>").attr("class", "uk-text-meta uk-margin-remove-top").html('See the full recipe at: <a href=" + data.url + "target="_blank">' + data.source + "</a>"));
     headGrid.append(imgCont);
     headGrid.append(headerTextDiv);
     cardHead.append(headGrid);
